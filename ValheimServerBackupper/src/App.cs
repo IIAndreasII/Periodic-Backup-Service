@@ -50,7 +50,7 @@ namespace ValheimServerBackupper
 			}
 		}
 
-		private static void OnTimedEvent(object sender, EventArgs args)
+		public static void OnTimedEvent(object sender, EventArgs args)
 		{
 			Run();
 		}
