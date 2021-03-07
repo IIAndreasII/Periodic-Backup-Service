@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.IO.Compression;
 using System.Timers;
 
 namespace ValheimServerBackupper
@@ -40,13 +41,18 @@ namespace ValheimServerBackupper
 		{
 			ParseArgs(out string source, out string target, out bool overwrite);
 
-			if (BackupFiles(source, target, overwrite))
+			try
 			{
-				Console.WriteLine("\nFiles backed up successfully!\n");
+				if(BackupFiles(source, target, overwrite, out string backupDir))
+				{
+					Console.WriteLine("\nFiles backed up successfully!\n");
+				}
+
+				CompressDirectory(backupDir);
 			}
-			else
+			catch (Exception e)
 			{
-				Console.WriteLine($"\nError backing up files: Could not find directory: {source}\n\nExiting...");
+				Console.WriteLine(e.Message);
 			}
 		}
 
@@ -80,12 +86,14 @@ namespace ValheimServerBackupper
 			}
 		}
 
-		private static bool BackupFiles(string sourceDir, string targetDir, bool overwrite)
+		private static bool BackupFiles(string sourceDir, string targetDir, bool overwrite, out string backupDir)
 		{
+			backupDir = string.Empty;
 			Console.WriteLine("Backing up files...");
 
 			if (!Directory.Exists(sourceDir))
 			{
+				Console.WriteLine($"\nError backing up files: Could not find directory {sourceDir}\n\nExiting...");
 				return false;
 			}
 
@@ -96,7 +104,7 @@ namespace ValheimServerBackupper
 			}
 
 			string timeString = DateTime.Now.ToString("u").Replace('-', '_').Replace(':', '-');
-			string backupDir = Path.Combine(targetDir, timeString.Remove(timeString.Length - 1, 1));
+			backupDir = Path.Combine(targetDir, timeString.Remove(timeString.Length - 1, 1));
 
 			if (!Directory.Exists(backupDir))
 			{
@@ -111,6 +119,29 @@ namespace ValheimServerBackupper
 				File.Copy(file, destFile, overwrite);
 			}
 
+			return true;
+		}
+
+		private static bool CompressDirectory(string path, bool deleteUncompressed = true)
+		{
+			try
+			{
+				string archiveName = path + ".zip";
+				Console.WriteLine($"\nCompressing directory \"{path}\" into \"{archiveName}\"");
+				ZipFile.CreateFromDirectory(path, archiveName);
+
+				if (deleteUncompressed) 
+				{ 
+					Directory.Delete(path, true);
+				}
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e.Message);
+				Console.WriteLine("\nCompression failed!");
+				throw;
+			}
+			Console.WriteLine("\nCompression successful!");
 			return true;
 		}
 	}

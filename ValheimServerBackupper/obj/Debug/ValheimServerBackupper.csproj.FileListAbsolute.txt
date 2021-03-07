@@ -5,3 +5,10 @@ C:\Users\andeb\source\repos\ValheimServerBackupper\ValheimServerBackupper\obj\De
 C:\Users\andeb\source\repos\ValheimServerBackupper\ValheimServerBackupper\obj\Debug\ValheimServerBackupper.csproj.CoreCompileInputs.cache
 C:\Users\andeb\source\repos\ValheimServerBackupper\ValheimServerBackupper\obj\Debug\ValheimServerBackupper.exe
 C:\Users\andeb\source\repos\ValheimServerBackupper\ValheimServerBackupper\obj\Debug\ValheimServerBackupper.pdb
+C:\Users\andeb\source\repos\periodic-backup-service\ValheimServerBackupper\bin\Debug\ValheimServerBackupper.exe.config
+C:\Users\andeb\source\repos\periodic-backup-service\ValheimServerBackupper\bin\Debug\ValheimServerBackupper.exe
+C:\Users\andeb\source\repos\periodic-backup-service\ValheimServerBackupper\bin\Debug\ValheimServerBackupper.pdb
+C:\Users\andeb\source\repos\periodic-backup-service\ValheimServerBackupper\obj\Debug\ValheimServerBackupper.csprojAssemblyReference.cache
+C:\Users\andeb\source\repos\periodic-backup-service\ValheimServerBackupper\obj\Debug\ValheimServerBackupper.csproj.CoreCompileInputs.cache
+C:\Users\andeb\source\repos\periodic-backup-service\ValheimServerBackupper\obj\Debug\ValheimServerBackupper.exe
+C:\Users\andeb\source\repos\periodic-backup-service\ValheimServerBackupper\obj\Debug\ValheimServerBackupper.pdb
