@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="src\App.cs" />
     <Compile Include="src\ArgumentParser.cs" />
+    <Compile Include="src\BackupManager.cs" />
     <Compile Include="src\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\TimeUtils.cs" />

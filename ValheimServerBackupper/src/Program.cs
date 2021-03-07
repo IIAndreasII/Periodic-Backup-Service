@@ -6,8 +6,8 @@ namespace ValheimServerBackupper
 	{
 		static void Main(string[] args)
 		{
-			Console.CancelKeyPress += App.OnTimedEvent;
-			App.Init(new ArgumentParser(args));
+			App app = new App(new ArgumentParser(args));
+			Console.CancelKeyPress += app.OnTimedEvent;
 			Console.WriteLine("\nPress CTRL+C to exit...");
 			while (true) ;
 		}		
