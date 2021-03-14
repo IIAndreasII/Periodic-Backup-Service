@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.GUI\src\App.xaml
-1124921422
+3-1746321351
 
-6-1402855651
-13-1505183044
-src\MainWindow.xaml;
+8-901065578
+14516550409
+src\AddBackupProcessView.xaml;src\CreateBackupView.xaml;src\MainWindow.xaml;
 
 True
 

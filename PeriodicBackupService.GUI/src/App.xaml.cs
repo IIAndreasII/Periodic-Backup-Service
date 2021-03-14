@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using PeriodicBackupService.ViewModels;
 
 namespace GUI
 {
@@ -13,5 +14,15 @@ namespace GUI
 	/// </summary>
 	public partial class App : Application
 	{
+		protected override void OnStartup(StartupEventArgs e)
+		{
+			base.OnStartup(e);
+			MainWindow window = new MainWindow();
+
+			MainWindowViewModel viewModel = new MainWindowViewModel();
+
+			window.DataContext = viewModel;
+			window.Show();
+		}
 	}
 }

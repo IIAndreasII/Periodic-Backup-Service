@@ -13,3 +13,12 @@ C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.GUI\ob
 C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.GUI\obj\Debug\src\MainWindow.g.cs
 C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.GUI\obj\Debug\src\App.g.cs
 C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.GUI\obj\Debug\src\MainWindow.baml
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.GUI\bin\Debug\PeriodicBackupService.dll
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.GUI\bin\Debug\PeriodicBackupService.pdb
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.GUI\bin\Debug\PeriodicBackupService.dll.config
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.GUI\obj\Debug\PeriodicBackupService.GUI.csproj.CopyComplete
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.GUI\obj\Debug\src\AddBackupProcessView.g.cs
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.GUI\obj\Debug\src\CreateBackupView.g.cs
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.GUI\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.GUI\obj\Debug\src\AddBackupProcessView.baml
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.GUI\obj\Debug\src\CreateBackupView.baml

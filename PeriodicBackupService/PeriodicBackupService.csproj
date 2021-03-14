@@ -51,6 +51,7 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.IO.Compression.FileSystem" />
@@ -70,7 +71,16 @@
     <Compile Include="src\BackupManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\IBackupManager.cs" />
+    <Compile Include="src\IWindowService.cs" />
+    <Compile Include="src\Models\BackupProcessModel.cs" />
+    <Compile Include="src\RelayCommand.cs" />
     <Compile Include="src\TimeUtils.cs" />
+    <Compile Include="src\ViewModels\AddBackupProcessViewModel.cs" />
+    <Compile Include="src\ViewModels\CreateBackupViewModel.cs" />
+    <Compile Include="src\ViewModels\IPageViewModel.cs" />
+    <Compile Include="src\ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="src\ViewModels\ViewModelBase.cs" />
+    <Compile Include="src\BackupConfigWindowService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
