@@ -5,10 +5,10 @@ C:\Users\andeb\source\repos\periodic-backup-service\ValheimServerBackupper\obj\D
 C:\Users\andeb\source\repos\periodic-backup-service\ValheimServerBackupper\obj\Debug\PeriodicBackupService.csproj.CoreCompileInputs.cache
 C:\Users\andeb\source\repos\periodic-backup-service\ValheimServerBackupper\obj\Debug\ValheimServerBackupper.exe
 C:\Users\andeb\source\repos\periodic-backup-service\ValheimServerBackupper\obj\Debug\ValheimServerBackupper.pdb
-C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService\bin\Debug\PeriodicBackupService.exe.config
-C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService\bin\Debug\PeriodicBackupService.exe
 C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService\bin\Debug\PeriodicBackupService.pdb
-C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService\obj\Debug\PeriodicBackupService.csprojAssemblyReference.cache
 C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService\obj\Debug\PeriodicBackupService.csproj.CoreCompileInputs.cache
-C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService\obj\Debug\PeriodicBackupService.exe
 C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService\obj\Debug\PeriodicBackupService.pdb
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService\bin\Debug\PeriodicBackupService.dll.config
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService\bin\Debug\PeriodicBackupService.dll
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService\obj\Debug\PeriodicBackupService.dll
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService\obj\Debug\PeriodicBackupService.csprojAssemblyReference.cache

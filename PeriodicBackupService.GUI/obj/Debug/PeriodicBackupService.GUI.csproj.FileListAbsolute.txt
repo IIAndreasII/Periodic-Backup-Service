@@ -1,0 +1,15 @@
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.GUI\bin\Debug\GUI.exe.config
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.GUI\bin\Debug\GUI.exe
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.GUI\bin\Debug\GUI.pdb
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.GUI\obj\Debug\PeriodicBackupService.GUI.csprojAssemblyReference.cache
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.GUI\obj\Debug\GUI_MarkupCompile.cache
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.GUI\obj\Debug\GUI_MarkupCompile.lref
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.GUI\obj\Debug\GUI.g.resources
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.GUI\obj\Debug\GUI.Properties.Resources.resources
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.GUI\obj\Debug\PeriodicBackupService.GUI.csproj.GenerateResource.cache
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.GUI\obj\Debug\PeriodicBackupService.GUI.csproj.CoreCompileInputs.cache
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.GUI\obj\Debug\GUI.exe
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.GUI\obj\Debug\GUI.pdb
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.GUI\obj\Debug\src\MainWindow.g.cs
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.GUI\obj\Debug\src\App.g.cs
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.GUI\obj\Debug\src\MainWindow.baml

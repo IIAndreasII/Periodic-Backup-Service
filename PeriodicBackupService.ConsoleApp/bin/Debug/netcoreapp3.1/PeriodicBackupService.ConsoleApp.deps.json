@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "PeriodicBackupService.ConsoleApp/1.0.0": {
+        "dependencies": {
+          "PeriodicBackupService": "1.0.0"
+        },
+        "runtime": {
+          "PeriodicBackupService.ConsoleApp.dll": {}
+        }
+      },
+      "PeriodicBackupService/1.0.0": {
+        "runtime": {
+          "PeriodicBackupService.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "PeriodicBackupService.ConsoleApp/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "PeriodicBackupService/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
