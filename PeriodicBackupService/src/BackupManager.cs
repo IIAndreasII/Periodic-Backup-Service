@@ -12,20 +12,23 @@ namespace PeriodicBackupService
 		private readonly string sourceDirectory;
 		private readonly string targetDirectory;
 		private readonly bool compress;
+		private readonly int maxNbrBackups;
 
-		public BackupManager(string sourceDirectory, string targetDirectory, bool compress)
+		public BackupManager(string sourceDirectory, string targetDirectory, int maxNbrBackups, bool compress)
 		{
 			this.sourceDirectory = string.IsNullOrEmpty(sourceDirectory) ? SOURCE_DIR : sourceDirectory;
 			this.targetDirectory = string.IsNullOrEmpty(targetDirectory) ? TARGET_DIR : targetDirectory;
+			this.maxNbrBackups = maxNbrBackups;
 			this.compress = compress;
 		}
 
 		public bool CreateBackup()
 		{
-			return BackupDirectory(sourceDirectory, targetDirectory, compress);
+			return BackupDirectory(sourceDirectory, targetDirectory, maxNbrBackups, compress);
 		}
 
-		private static bool BackupDirectory(string sourceDir, string targetDir, bool useCompression)
+		private static bool BackupDirectory(string sourceDir, string targetDir, int maxNbrBackups, bool useCompression,
+			string backupName = "")
 		{
 			Console.WriteLine("Backing up files...");
 
@@ -41,10 +44,16 @@ namespace PeriodicBackupService
 				Directory.CreateDirectory(targetDir);
 			}
 
-			// Create directory with current date
-			var timeString =
-				DateTime.Now.ToString("u").Replace('-', '_').Replace(':', '-'); // Make Windows accept directory name
-			var backupDir = Path.Combine(targetDir, timeString.Remove(timeString.Length - 1, 1));
+			if (string.IsNullOrEmpty(backupName))
+			{
+				// Create directory with current date
+				var timeString =
+					DateTime.Now.ToString("u").Replace('-', '_')
+						.Replace(':', '-'); // Make Windows accept directory name
+				backupName = timeString.Remove(timeString.Length - 1, 1);
+			}
+
+			var backupDir = Path.Combine(targetDir, backupName);
 			if (!Directory.Exists(backupDir))
 			{
 				Console.WriteLine("\nCreating backup directory...");
@@ -62,6 +71,8 @@ namespace PeriodicBackupService
 			{
 				CompressDirectory(backupDir);
 			}
+
+			CleanBackupDirectory(targetDir, maxNbrBackups);
 
 			return true;
 		}
@@ -86,6 +97,38 @@ namespace PeriodicBackupService
 				Console.WriteLine(e.Message);
 				Console.WriteLine("\nCompression failed!");
 			}
+		}
+
+		private static void CleanBackupDirectory(string targetDir, int maxNbrBackups)
+		{
+			if (maxNbrBackups <= 0)
+			{
+				return;
+			}
+
+			var fileInfos = new DirectoryInfo(targetDir).GetFiles();
+			if (fileInfos.Length <= maxNbrBackups)
+			{
+				return;
+			}
+
+			Console.WriteLine("Cleaning up backup directory...\n");
+			try
+			{
+				Array.Sort(fileInfos, (left, right) => left.CreationTime.CompareTo(right.CreationTime));
+				for (var i = fileInfos.Length - maxNbrBackups; i > 0; i--)
+				{
+					Console.WriteLine($"Deleting \"{fileInfos[i - 1].Name}\"\n");
+					fileInfos[i - 1].Delete();
+				}
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e);
+				Console.WriteLine("\nCleaning up backup directory failed!\n");
+			}
+
+			Console.WriteLine("Cleaning up backup directory succeeded!\n");
 		}
 	}
 }

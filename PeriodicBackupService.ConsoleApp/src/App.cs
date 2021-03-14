@@ -13,6 +13,7 @@ namespace PeriodicBackupService.ConsoleApp
 		{
 			this.parser = parser;
 			backupManager = new BackupManager(parser.GetArgument("s"), parser.GetArgument("t"),
+				string.IsNullOrEmpty(parser.GetArgument("b")) ? 0 : int.Parse(parser.GetArgument("b")),
 				parser.GetBoolArgument("c"));
 			SetUpTimer();
 
