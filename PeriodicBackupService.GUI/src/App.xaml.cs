@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
+using GUI.Services;
+using GUI.ViewModels;
+using GUI.Views;
 
 namespace GUI
 {
@@ -13,5 +10,11 @@ namespace GUI
 	/// </summary>
 	public partial class App : Application
 	{
+		protected override void OnStartup(StartupEventArgs e)
+		{
+			base.OnStartup(e);
+			MainWindow window = new MainWindow {DataContext = new MainWindowViewModel(new ChooseDirectoryService())};
+			window.Show();
+		}
 	}
 }

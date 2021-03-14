@@ -6,7 +6,7 @@ namespace PeriodicBackupService.ConsoleApp
 {
 	internal class ArgumentParser
 	{
-		public static readonly string[] ACCEPTED_ARGS = {"-s", "-t", "-d", "-c"};
+		public static readonly string[] ACCEPTED_ARGS = {"-s", "-t", "-d", "-c", "-b"};
 
 		private readonly Dictionary<string, string> arguments = new Dictionary<string, string>();
 
@@ -33,17 +33,7 @@ namespace PeriodicBackupService.ConsoleApp
 				if (ACCEPTED_ARGS.Contains(args[i]))
 				{
 					var key = args[i].Trim('-')[0].ToString();
-					string value;
-
-					if (key == "c")
-					{
-						value = "true";
-						i++;
-					}
-					else
-					{
-						value = args[++i];
-					}
+					var value = key == "c" ? "true" : args[++i];
 
 					arguments.Add(key, value);
 				}

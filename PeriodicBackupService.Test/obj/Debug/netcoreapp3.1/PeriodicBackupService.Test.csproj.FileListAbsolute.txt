@@ -86,10 +86,6 @@ C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.Test\b
 C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.Test\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.TestPlatform.CommunicationUtilities.resources.dll
 C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.Test\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.TestPlatform.CrossPlatEngine.resources.dll
 C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.Test\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.VisualStudio.TestPlatform.Common.resources.dll
-C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.Test\bin\Debug\netcoreapp3.1\PeriodicBackupService.dll
-C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.Test\bin\Debug\netcoreapp3.1\PeriodicBackupService.pdb
-C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.Test\bin\Debug\netcoreapp3.1\PeriodicBackupService.dll.config
-C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.Test\obj\Debug\netcoreapp3.1\PeriodicBackupService.Test.csprojAssemblyReference.cache
 C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.Test\obj\Debug\netcoreapp3.1\PeriodicBackupService.Test.AssemblyInfoInputs.cache
 C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.Test\obj\Debug\netcoreapp3.1\PeriodicBackupService.Test.AssemblyInfo.cs
 C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.Test\obj\Debug\netcoreapp3.1\PeriodicBackupService.Test.csproj.CoreCompileInputs.cache
@@ -97,3 +93,7 @@ C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.Test\o
 C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.Test\obj\Debug\netcoreapp3.1\PeriodicBackupService.Test.dll
 C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.Test\obj\Debug\netcoreapp3.1\PeriodicBackupService.Test.pdb
 C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.Test\obj\Debug\netcoreapp3.1\PeriodicBackupService.Test.genruntimeconfig.cache
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.Test\bin\Debug\netcoreapp3.1\PeriodicBackupService.Core.dll
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.Test\bin\Debug\netcoreapp3.1\PeriodicBackupService.Core.pdb
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.Test\bin\Debug\netcoreapp3.1\PeriodicBackupService.Core.dll.config
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.Test\obj\Debug\netcoreapp3.1\PeriodicBackupService.Test.csprojAssemblyReference.cache

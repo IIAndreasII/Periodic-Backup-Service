@@ -1,5 +1,5 @@
-using System.Net;
 using NUnit.Framework;
+using PeriodicBackupService.Core;
 
 // Use the Moq library?
 
@@ -42,7 +42,7 @@ namespace PeriodicBackupService.Test
 
 		private void UseImplementationBackupManager(bool useCompression)
 		{
-			backupManager = new BackupManager(SOURCE_DIR, TARGET_DIR, useCompression);
+			//backupManager = new BackupDirectoryManager(SOURCE_DIR, TARGET_DIR, useCompression);
 		}
 	}
 }

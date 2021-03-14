@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Timers;
+using PeriodicBackupService.Core;
 
 namespace PeriodicBackupService.ConsoleApp
 {
@@ -12,7 +13,8 @@ namespace PeriodicBackupService.ConsoleApp
 		public App(ArgumentParser parser)
 		{
 			this.parser = parser;
-			backupManager = new BackupManager(parser.GetArgument("s"), parser.GetArgument("t"),
+			backupManager = new BackupDirectoryManager(parser.GetArgument("s"), parser.GetArgument("t"),
+				string.IsNullOrEmpty(parser.GetArgument("b")) ? 0 : int.Parse(parser.GetArgument("b")),
 				parser.GetBoolArgument("c"));
 			SetUpTimer();
 
