@@ -1,6 +1,6 @@
 ﻿namespace PeriodicBackupService
 {
-	class TimeUtils
+	public class TimeUtils
 	{
 		public static double HoursToMillis(int hours)
 		{
