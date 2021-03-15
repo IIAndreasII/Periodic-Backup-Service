@@ -2,13 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PeriodicBackupService.ViewModels
 {
-	public abstract class ViewModelBase : INotifyPropertyChanged, IDisposable
+	public abstract class ViewModelBase : INotifyPropertyChanged
 	{
 		public string DisplayName { get; protected set; }
 		public bool ThrowOnInvalidPropertyName { get; protected set; }
@@ -45,18 +42,18 @@ namespace PeriodicBackupService.ViewModels
 		{
 			// Verify that the property name matches a real, 
 			// public, instance property on this object. 
-			if (TypeDescriptor.GetProperties(this)[propertyName] == null)
+			if (TypeDescriptor.GetProperties(this)[propertyName] != null)
 			{
-				string msg = "Invalid property name: " + propertyName;
-				if (ThrowOnInvalidPropertyName)
-				{
-					throw new Exception(msg);
-				}
-
-				Debug.Fail(msg);
+				return;
 			}
-		}
 
-		public abstract void Dispose();
+			var msg = "Invalid property name: " + propertyName;
+			if (ThrowOnInvalidPropertyName)
+			{
+				throw new Exception(msg);
+			}
+
+			Debug.Fail(msg);
+		}
 	}
 }

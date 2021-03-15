@@ -34,7 +34,8 @@
             <ItemsControl ItemsSource="{Binding PageViewModels}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Button Content="{Binding Name}"
+                        <Button FontSize="15"
+                                Content="{Binding Name}"
                                 Command="{Binding DataContext.ChangePageCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
                                 CommandParameter="{Binding }"
                                 Margin="2,5"/>

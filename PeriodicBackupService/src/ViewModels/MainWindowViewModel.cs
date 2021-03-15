@@ -56,9 +56,5 @@ namespace PeriodicBackupService.ViewModels
 
 			CurrentPageViewModel = PageViewModels.FirstOrDefault(vm => vm == viewModel);
 		}
-
-		public override void Dispose()
-		{
-		}
 	}
 }
