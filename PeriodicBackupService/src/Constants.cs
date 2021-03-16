@@ -11,5 +11,6 @@
 		public const string SUSPEND = "Suspend";
 		public const string RESUME = "Resume";
 		public const string STATUS = "Status";
+		public const string EMPTY_TIME = "--:--:--";
 	}
 }

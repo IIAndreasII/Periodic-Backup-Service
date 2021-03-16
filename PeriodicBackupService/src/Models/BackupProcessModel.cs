@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Timers;
 using PeriodicBackupService.Core;
 
@@ -11,7 +12,11 @@ namespace PeriodicBackupService.Models
 		private string lastBackupStatus = Constants.OK;
 		private string nextBackupTime;
 
+		private Timer timer;
+		private Stopwatch stopwatch;
+
 		private readonly double interval;
+		private readonly IBackupManager backupManager;
 
 		public string Name
 		{
@@ -53,9 +58,6 @@ namespace PeriodicBackupService.Models
 			}
 		}
 
-		private readonly IBackupManager backupManager;
-
-		private Timer timer;
 
 		public BackupProcessModel(string name, string sourceDir, string targetDir, int maxNbrBackups, double interval,
 			bool useCompression)
@@ -77,6 +79,7 @@ namespace PeriodicBackupService.Models
 			timer = new Timer(interval);
 			timer.Elapsed += OnTimedEvent;
 			timer.Start();
+			stopwatch = Stopwatch.StartNew();
 		}
 
 		public void Dispose()
@@ -87,6 +90,18 @@ namespace PeriodicBackupService.Models
 		public void Toggle()
 		{
 			timer.Enabled = !timer.Enabled;
+			if (timer.Enabled)
+			{
+				NextBackupTime = DateTime.Now.AddMilliseconds(interval - stopwatch.ElapsedMilliseconds)
+					.ToLongTimeString();
+				stopwatch.Start();
+			}
+			else
+			{
+				NextBackupTime = Constants.EMPTY_TIME;
+				stopwatch.Stop();
+			}
+
 			Status = timer.Enabled ? Constants.RUNNING : Constants.SUSPENDED;
 		}
 
@@ -95,6 +110,7 @@ namespace PeriodicBackupService.Models
 			LastBackupStatus =
 				$"{(backupManager.CreateBackup() ? Constants.OK : Constants.NOK)} - {DateTime.Now.ToLongTimeString()}";
 			NextBackupTime = DateTime.Now.AddMilliseconds(interval).ToLongTimeString();
+			stopwatch = Stopwatch.StartNew();
 		}
 	}
 }

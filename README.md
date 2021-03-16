@@ -9,3 +9,5 @@
   - Example usage: ```-d 30```
 * Compression: ```-c```
   - Example usage: ```-c```
+* Max number of backups: ```-b <number>```
+  - Example usage: ```-b 15```
