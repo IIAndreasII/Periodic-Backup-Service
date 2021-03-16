@@ -1,7 +1,0 @@
-C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.Core\obj\Debug\PeriodicBackupService.Core.csproj.CoreCompileInputs.cache
-C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.Core\bin\Debug\PeriodicBackupService.Core.dll.config
-C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.Core\bin\Debug\PeriodicBackupService.Core.dll
-C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.Core\bin\Debug\PeriodicBackupService.Core.pdb
-C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.Core\obj\Debug\PeriodicBackupService.Core.dll
-C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.Core\obj\Debug\PeriodicBackupService.Core.pdb
-C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.Core\obj\Debug\PeriodicBackupService.Core.csprojAssemblyReference.cache
