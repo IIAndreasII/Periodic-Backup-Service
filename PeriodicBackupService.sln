@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeriodicBackupService.Core", "PeriodicBackupService.Core\PeriodicBackupService.Core.csproj", "{617688C9-C281-4B94-86E9-F75E9A28624A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeriodicBackupService.GUI", "PeriodicBackupService.GUI\PeriodicBackupService.GUI.csproj", "{6564D85A-240E-4068-830E-D5B9DE7F2E33}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5025EAE8-977F-47C8-85A4-D95BFE472F7A} = {5025EAE8-977F-47C8-85A4-D95BFE472F7A}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PeriodicBackupService.ConsoleApp", "PeriodicBackupService.ConsoleApp\PeriodicBackupService.ConsoleApp.csproj", "{429332BF-6E7A-431F-9355-87184AF81512}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PeriodicBackupService.Test", "PeriodicBackupService.Test\PeriodicBackupService.Test.csproj", "{85106A74-0150-464E-AE55-50040144887A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{617688C9-C281-4B94-86E9-F75E9A28624A} = {617688C9-C281-4B94-86E9-F75E9A28624A}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeriodicBackupService", "PeriodicBackupService\PeriodicBackupService.csproj", "{5025EAE8-977F-47C8-85A4-D95BFE472F7A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{617688C9-C281-4B94-86E9-F75E9A28624A} = {617688C9-C281-4B94-86E9-F75E9A28624A}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{617688C9-C281-4B94-86E9-F75E9A28624A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{617688C9-C281-4B94-86E9-F75E9A28624A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{617688C9-C281-4B94-86E9-F75E9A28624A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{617688C9-C281-4B94-86E9-F75E9A28624A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6564D85A-240E-4068-830E-D5B9DE7F2E33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6564D85A-240E-4068-830E-D5B9DE7F2E33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6564D85A-240E-4068-830E-D5B9DE7F2E33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6564D85A-240E-4068-830E-D5B9DE7F2E33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{429332BF-6E7A-431F-9355-87184AF81512}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{429332BF-6E7A-431F-9355-87184AF81512}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{429332BF-6E7A-431F-9355-87184AF81512}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{429332BF-6E7A-431F-9355-87184AF81512}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85106A74-0150-464E-AE55-50040144887A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85106A74-0150-464E-AE55-50040144887A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85106A74-0150-464E-AE55-50040144887A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85106A74-0150-464E-AE55-50040144887A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5025EAE8-977F-47C8-85A4-D95BFE472F7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5025EAE8-977F-47C8-85A4-D95BFE472F7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5025EAE8-977F-47C8-85A4-D95BFE472F7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5025EAE8-977F-47C8-85A4-D95BFE472F7A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {29FC9AC2-C68C-401B-9860-D26C143152B8}
+	EndGlobalSection
+EndGlobal
