@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "PeriodicBackupService.ConsoleApp": {
+      "commandName": "Project",
+      "commandLineArgs": "-c -b 2"
+    }
+  }
+}
