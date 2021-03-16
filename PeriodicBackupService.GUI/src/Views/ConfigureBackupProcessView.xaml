@@ -3,11 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:GUI.src.Views"
         xmlns:vm="clr-namespace:GUI.ViewModels"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=vm:BackupProcessesViewModel}"
-        Title="Configure Process" Height="300" Width="600">
+        Title="Configure Process" Height="300" Width="600"
+        ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.2*"/>
@@ -24,8 +24,8 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="0.9*"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition/>
             <ColumnDefinition Width="0.5*"/>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -45,6 +45,7 @@
             FontSize="15"/>
         <Button
             Grid.Column="6" Grid.Row="1" Width="65" Margin="5"
+            BorderThickness="0"
             VerticalAlignment="Center" HorizontalAlignment="Left"
             Command="{Binding Path=ChooseSourcePathCommand}">
             Browse...
@@ -63,6 +64,7 @@
              FontSize="15"/>
         <Button 
             Grid.Column="6" Grid.Row="2"  Width="65" Margin="5"
+            BorderThickness="0"
             VerticalAlignment="Center" HorizontalAlignment="Left"
             Command="{Binding Path=ChooseTargetPathCommand}">
             Browse...
@@ -92,6 +94,7 @@
             VerticalAlignment="Center"
             FontSize="15"/>
         <ComboBox Grid.Column="2" Grid.Row="4" Margin="5" Width="Auto"
+                  BorderThickness="0"
                   IsEditable="False"
                   ItemsSource="{Binding Path=ComboBoxContent}"
                   SelectedValue="{Binding Path=IntervalUnit}"/>
@@ -124,16 +127,27 @@
         <Label
             Grid.Column="0" Grid.Row="7"
             HorizontalAlignment="Right"
-            FontSize="12">
-            (*Required field)
+            FontSize="11">
+            *Required field
         </Label>
 
         <!-- Confirm -->
         <Button
-            Grid.Column="3" Grid.Row="8" Margin="10"
+            Grid.Column="5" Grid.Row="8" Margin="0,10,5,10"
+            BorderThickness="0"
             Command="{Binding Path=ConfirmConfigurationCommand}"
             FontSize="15">
             Confirm
         </Button>
+
+        <!-- Cancel -->
+        <Button
+            Grid.Column="6" Grid.Row="8" Margin="0,10,5,10"
+            BorderThickness="0"
+            Command="{Binding Path=CancelConfigurationCommand}"
+            FontSize="15">
+            Cancel
+        </Button>
+
     </Grid>
 </Window>

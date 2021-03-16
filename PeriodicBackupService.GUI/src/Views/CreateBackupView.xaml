@@ -40,6 +40,7 @@
             FontSize="15"/>
         <Button
             Grid.Column="4" Grid.Row="1" Width="65" Margin="5"
+            BorderThickness="0"
             VerticalAlignment="Center" HorizontalAlignment="Left"
             Command="{Binding Path=ChooseSourcePathCommand}">
             Browse...
@@ -59,6 +60,7 @@
              FontSize="15"/>
         <Button 
             Grid.Column="4" Grid.Row="2"  Width="65" Margin="5"
+            BorderThickness="0"
             VerticalAlignment="Center" HorizontalAlignment="Left"
             Command="{Binding Path=ChooseTargetPathCommand}">
             Browse...
@@ -90,7 +92,8 @@
 
         <!-- Create backup -->
         <Button
-            Grid.Column="2" Grid.Row="5" Margin="10"
+            Grid.Column="2" Grid.Row="5" Margin="10" Height="40"
+            BorderThickness="0"
             Command="{Binding Path=CreateBackupCommand}"
             FontSize="15">
             Backup

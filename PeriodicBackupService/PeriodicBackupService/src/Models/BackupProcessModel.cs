@@ -4,13 +4,54 @@ using PeriodicBackupService.Core;
 
 namespace PeriodicBackupService.Models
 {
-	public class BackupProcessModel : IProcessModel, IDisposable
+	public class BackupProcessModel : ModelBase, IProcessModel, IDisposable
 	{
-		public string Name { get; set; }
+		private string name;
+		private string status = Constants.RUNNING;
+		private string lastBackupStatus = Constants.OK;
+		private string nextBackupTime;
 
-		public string Status { get; set; } = Constants.RUNNING;
+		private readonly double interval;
 
-		public string LastBackupStatus { get; set; } = Constants.OK;
+		public string Name
+		{
+			get => name;
+			set
+			{
+				name = value;
+				OnPropertyChanged(nameof(Name));
+			}
+		}
+
+		public string Status
+		{
+			get => status;
+			set
+			{
+				status = value;
+				OnPropertyChanged(nameof(Status));
+			}
+		}
+
+		public string LastBackupStatus
+		{
+			get => lastBackupStatus;
+			set
+			{
+				lastBackupStatus = value;
+				OnPropertyChanged(nameof(LastBackupStatus));
+			}
+		}
+
+		public string NextBackupTime
+		{
+			get => nextBackupTime;
+			set
+			{
+				nextBackupTime = value;
+				OnPropertyChanged(nameof(NextBackupTime));
+			}
+		}
 
 		private readonly IBackupManager backupManager;
 
@@ -21,15 +62,17 @@ namespace PeriodicBackupService.Models
 		{
 			Name = name;
 			backupManager = new BackupDirectoryManager(sourceDir, targetDir, maxNbrBackups, useCompression);
-			SetUpTimer(interval);
+			this.interval = interval == 0 ? TimeUtils.HoursToMillis(1) : interval;
+			SetUpTimer();
+			DoBackup();
 		}
 
 		private void OnTimedEvent(object sender, EventArgs args)
 		{
-			backupManager.CreateBackup();
+			DoBackup();
 		}
 
-		private void SetUpTimer(double interval)
+		private void SetUpTimer()
 		{
 			timer = new Timer(interval);
 			timer.Elapsed += OnTimedEvent;
@@ -45,6 +88,13 @@ namespace PeriodicBackupService.Models
 		{
 			timer.Enabled = !timer.Enabled;
 			Status = timer.Enabled ? Constants.RUNNING : Constants.SUSPENDED;
+		}
+
+		private void DoBackup()
+		{
+			LastBackupStatus =
+				$"{(backupManager.CreateBackup() ? Constants.OK : Constants.NOK)} - {DateTime.Now.ToLongTimeString()}";
+			NextBackupTime = DateTime.Now.AddMilliseconds(interval).ToLongTimeString();
 		}
 	}
 }

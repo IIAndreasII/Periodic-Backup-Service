@@ -94,7 +94,6 @@
     <Compile Include="src\Services\InfoMessageBoxService.cs" />
     <Compile Include="src\Services\IWindowService.cs" />
     <Compile Include="src\ViewModels\BackupProcessesViewModel.cs" />
-    <Compile Include="src\ViewModels\ConfigureBackupProcessViewModel.cs" />
     <Compile Include="src\ViewModels\CreateBackupViewModel.cs" />
     <Compile Include="src\ViewModels\IOViewModelBase.cs" />
     <Compile Include="src\ViewModels\IPageViewModel.cs" />

@@ -2,25 +2,12 @@
 using System.ComponentModel;
 using System.Diagnostics;
 
-namespace PeriodicBackupService.ViewModels
+namespace PeriodicBackupService.Models
 {
-	public abstract class ViewModelBase : INotifyPropertyChanged
+	public abstract class ModelBase : INotifyPropertyChanged
 	{
-		public string DisplayName { get; protected set; }
-		public bool ThrowOnInvalidPropertyName { get; protected set; }
-
 		public event PropertyChangedEventHandler PropertyChanged;
-
-		protected ViewModelBase(string displayName, bool throwOnInvalidProperty)
-		{
-			DisplayName = displayName;
-			ThrowOnInvalidPropertyName = throwOnInvalidProperty;
-		}
-
-		protected ViewModelBase()
-		{
-			ThrowOnInvalidPropertyName = true;
-		}
+		public bool ThrowOnInvalidPropertyName { get; protected set; }
 
 		protected virtual void OnPropertyChanged(string propertyName)
 		{
@@ -46,7 +33,7 @@ namespace PeriodicBackupService.ViewModels
 				return;
 			}
 
-			string msg = "Invalid property name: " + propertyName;
+			var msg = "Invalid property name: " + propertyName;
 			if (ThrowOnInvalidPropertyName)
 			{
 				throw new Exception(msg);

@@ -27,6 +27,7 @@ namespace GUI.ViewModels
 		private ICommand selectionChangedCommand;
 
 		private ICommand confirmConfigurationCommand;
+		private ICommand cancelConfigurationCommand;
 
 		private readonly IProcessFactory processModelFactory;
 		private readonly IWindowService windowService;
@@ -123,6 +124,7 @@ namespace GUI.ViewModels
 			{
 				return addProcessCommand ?? (addProcessCommand = new RelayCommand(p =>
 				{
+					ClearFields();
 					windowService.OpenWindow(this);
 				}));
 			}
@@ -134,12 +136,7 @@ namespace GUI.ViewModels
 			{
 				return toggleProcessCommand ?? (toggleProcessCommand = new RelayCommand(p =>
 					{
-						IProcessModel temp = ProcessModels[SelectedIndex];
-						int index = ProcessModels.IndexOf(temp);
-						ProcessModels.RemoveAt(SelectedIndex);
-						temp.Toggle();
-						SelectedIndex = index;
-						ProcessModels.Insert(SelectedIndex, temp);
+						ProcessModels[SelectedIndex].Toggle();
 						UpdateToggleButtonText();
 						OnPropertyChanged(nameof(ProcessModels));
 					},
@@ -176,8 +173,6 @@ namespace GUI.ViewModels
 			{
 				return confirmConfigurationCommand ?? (confirmConfigurationCommand = new RelayCommand(p =>
 					{
-						// TODO: Create new model with factory and add to observable list
-
 						ProcessModels.Add(
 							processModelFactory.Create(ProcessName, SourcePath, TargetPath, MaxNbrBackups,
 								Interval, intervalUnit, UseCompression.ToString()));
@@ -186,6 +181,17 @@ namespace GUI.ViewModels
 						OnPropertyChanged(nameof(ProcessModels));
 					},
 					p => ValidateParams()));
+			}
+		}
+
+		public ICommand CancelConfigurationCommand
+		{
+			get
+			{
+				return cancelConfigurationCommand ?? (cancelConfigurationCommand = new RelayCommand(p =>
+				{
+					windowService.CloseWindow();
+				}));
 			}
 		}
 
@@ -204,6 +210,17 @@ namespace GUI.ViewModels
 			ToggleButtonText = ProcessModels[SelectedIndex].Status == Constants.RUNNING
 				? Constants.SUSPEND
 				: Constants.RESUME;
+		}
+
+		private void ClearFields()
+		{
+			SourcePath = string.Empty;
+			TargetPath = string.Empty;
+			Interval = string.Empty;
+			IntervalUnit = ComboBoxContent[0];
+			MaxNbrBackups = string.Empty;
+			UseCompression = true;
+			ProcessName = string.Empty;
 		}
 	}
 }
