@@ -56,7 +56,7 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\PeriodicBackupService.Core\PeriodicBackupService.Core.csproj">
+    <ProjectReference Include="..\PeriodicBackupService.Core\PeriodicBackupService.Core.csproj">
       <Project>{617688c9-c281-4b94-86e9-f75e9a28624a}</Project>
       <Name>PeriodicBackupService.Core</Name>
     </ProjectReference>

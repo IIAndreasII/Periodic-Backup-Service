@@ -145,7 +145,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PeriodicBackupService\PeriodicBackupService\PeriodicBackupService.csproj">
+    <ProjectReference Include="..\PeriodicBackupService\PeriodicBackupService.csproj">
       <Project>{5025eae8-977f-47c8-85a4-d95bfe472f7a}</Project>
       <Name>PeriodicBackupService</Name>
     </ProjectReference>
