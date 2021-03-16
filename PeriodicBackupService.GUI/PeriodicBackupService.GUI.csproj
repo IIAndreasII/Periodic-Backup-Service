@@ -35,10 +35,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>GUI.App</StartupObject>
+    <StartupObject>
+    </StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.19\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism, Version=8.0.0.1909, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Core.8.0.0.1909\lib\net47\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Wpf, Version=8.0.0.1909, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.8.0.0.1909\lib\net47\Prism.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -59,29 +70,55 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="src\AddBackupProcessView.xaml">
+    <Page Include="src\Views\BackupProcessesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="src\CreateBackupView.xaml">
+    <Page Include="src\Views\ConfigureBackupProcessView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="src\MainWindow.xaml">
+    <Page Include="src\Views\CreateBackupView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="src\Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="src\AddBackupProcessView.xaml.cs">
-      <DependentUpon>AddBackupProcessView.xaml</DependentUpon>
+    <Compile Include="src\Constants.cs" />
+    <Compile Include="src\Models\BackupProcessModel.cs" />
+    <Compile Include="src\Models\Factories\BackupProcessModelFactory.cs" />
+    <Compile Include="src\Models\Factories\IProcessFactory.cs" />
+    <Compile Include="src\Models\IProcessModel.cs" />
+    <Compile Include="src\RelayCommand.cs" />
+    <Compile Include="src\Services\ChooseDirectoryService.cs" />
+    <Compile Include="src\Services\ConfigureBackupProcessWindowService.cs" />
+    <Compile Include="src\Services\IIOService.cs" />
+    <Compile Include="src\Services\IMessageBoxService.cs" />
+    <Compile Include="src\Services\InfoMessageBoxService.cs" />
+    <Compile Include="src\Services\IWindowService.cs" />
+    <Compile Include="src\ViewModels\BackupProcessesViewModel.cs" />
+    <Compile Include="src\ViewModels\ConfigureBackupProcessViewModel.cs" />
+    <Compile Include="src\ViewModels\CreateBackupViewModel.cs" />
+    <Compile Include="src\ViewModels\IOViewModelBase.cs" />
+    <Compile Include="src\ViewModels\IPageViewModel.cs" />
+    <Compile Include="src\ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="src\ViewModels\ViewModelBase.cs" />
+    <Compile Include="src\Views\BackupProcessesView.xaml.cs">
+      <DependentUpon>BackupProcessesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="src\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="src\CreateBackupView.xaml.cs">
+    <Compile Include="src\Views\ConfigureBackupProcessView.xaml.cs">
+      <DependentUpon>ConfigureBackupProcessView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="src\Views\CreateBackupView.xaml.cs">
       <DependentUpon>CreateBackupView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="src\MainWindow.xaml.cs">
+    <Compile Include="src\Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -104,6 +141,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

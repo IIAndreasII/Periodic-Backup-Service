@@ -69,19 +69,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="src\BackupManager.cs" />
+    <Compile Include="src\BackupDirectoryManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\IBackupManager.cs" />
-    <Compile Include="src\IIOService.cs" />
-    <Compile Include="src\IOService.cs" />
-    <Compile Include="src\Models\BackupProcessModel.cs" />
-    <Compile Include="src\RelayCommand.cs" />
     <Compile Include="src\TimeUtils.cs" />
-    <Compile Include="src\ViewModels\AddBackupProcessViewModel.cs" />
-    <Compile Include="src\ViewModels\CreateBackupViewModel.cs" />
-    <Compile Include="src\ViewModels\IPageViewModel.cs" />
-    <Compile Include="src\ViewModels\MainWindowViewModel.cs" />
-    <Compile Include="src\ViewModels\ViewModelBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

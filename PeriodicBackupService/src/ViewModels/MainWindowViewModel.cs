@@ -14,7 +14,7 @@ namespace PeriodicBackupService.ViewModels
 
 		public MainWindowViewModel()
 		{
-			PageViewModels.Add(new CreateBackupViewModel());
+			PageViewModels.Add(new CreateBackupViewModel(new BackupManager()));
 			PageViewModels.Add(new AddBackupProcessViewModel());
 
 			CurrentPageViewModel = PageViewModels[0];

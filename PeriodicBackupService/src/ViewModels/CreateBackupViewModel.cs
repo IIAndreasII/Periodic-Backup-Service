@@ -7,13 +7,12 @@ namespace PeriodicBackupService.ViewModels
 	{
 		public string Name => "Create backup";
 
-		private ICommand createBackupCommand;
+		private readonly IBackupManager backupManager;
 
-
-		public CreateBackupViewModel()
+		public CreateBackupViewModel(IBackupManager backupManager)
 		{
+			this.backupManager = backupManager;
 		}
-
 
 		public string SourcePath { get; set; }
 
@@ -27,7 +26,10 @@ namespace PeriodicBackupService.ViewModels
 			{
 				return new RelayCommand(p =>
 					{
-						/* TODO: Send stuff to model */
+						backupManager.SourceDirectory = SourcePath;
+						backupManager.TargetDirectory = TargetPath;
+						backupManager.UseCompression = UseCompression;
+						backupManager.CreateBackup();
 					},
 					p => ValidateProperties());
 			}

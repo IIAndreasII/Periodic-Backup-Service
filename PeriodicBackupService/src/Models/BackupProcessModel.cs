@@ -17,7 +17,7 @@ namespace PeriodicBackupService.Models
 			bool useCompression)
 		{
 			Name = name;
-			backupManager = new BackupManager(sourceDir, targetDir, maxNbrBackups, useCompression);
+			backupManager = new BackupDirectoryManager(sourceDir, targetDir, maxNbrBackups, useCompression);
 			SetUpTimer(interval);
 		}
 
