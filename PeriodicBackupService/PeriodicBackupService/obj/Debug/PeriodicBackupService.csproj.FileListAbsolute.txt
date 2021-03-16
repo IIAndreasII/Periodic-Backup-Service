@@ -1,0 +1,11 @@
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService\PeriodicBackupService\obj\Debug\PeriodicBackupService.csprojAssemblyReference.cache
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService\PeriodicBackupService\obj\Debug\PeriodicBackupService.csproj.CoreCompileInputs.cache
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService\PeriodicBackupService\bin\Debug\PeriodicBackupService.dll.config
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService\PeriodicBackupService\bin\Debug\PeriodicBackupService.dll
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService\PeriodicBackupService\bin\Debug\PeriodicBackupService.pdb
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService\PeriodicBackupService\bin\Debug\PeriodicBackupService.Core.dll
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService\PeriodicBackupService\bin\Debug\PeriodicBackupService.Core.pdb
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService\PeriodicBackupService\bin\Debug\PeriodicBackupService.Core.dll.config
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService\PeriodicBackupService\obj\Debug\PeriodicBackupService.csproj.CopyComplete
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService\PeriodicBackupService\obj\Debug\PeriodicBackupService.dll
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService\PeriodicBackupService\obj\Debug\PeriodicBackupService.pdb

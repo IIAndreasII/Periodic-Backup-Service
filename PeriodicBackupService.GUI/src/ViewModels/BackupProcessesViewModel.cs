@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
 using System.Windows.Input;
-using GUI.Models;
-using GUI.Models.Factories;
 using GUI.Services;
 using PeriodicBackupService;
+using PeriodicBackupService.Models;
+using PeriodicBackupService.Models.Factories;
 
 namespace GUI.ViewModels
 {

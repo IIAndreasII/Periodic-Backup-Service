@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using PeriodicBackupService.Core;
 
 // Use the Moq library?
 

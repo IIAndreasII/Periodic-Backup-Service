@@ -4,6 +4,16 @@
     "C:\\Users\\andeb\\source\\repos\\periodic-backup-service\\PeriodicBackupService.Test\\PeriodicBackupService.Test.csproj": {}
   },
   "projects": {
+    "C:\\Users\\andeb\\source\\repos\\periodic-backup-service\\PeriodicBackupService.Core\\PeriodicBackupService.Core.csproj": {
+      "restore": {
+        "projectUniqueName": "C:\\Users\\andeb\\source\\repos\\periodic-backup-service\\PeriodicBackupService.Core\\PeriodicBackupService.Core.csproj",
+        "projectName": "PeriodicBackupService.Core",
+        "projectPath": "C:\\Users\\andeb\\source\\repos\\periodic-backup-service\\PeriodicBackupService.Core\\PeriodicBackupService.Core.csproj"
+      },
+      "frameworks": {
+        "net472": {}
+      }
+    },
     "C:\\Users\\andeb\\source\\repos\\periodic-backup-service\\PeriodicBackupService.Test\\PeriodicBackupService.Test.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -28,8 +38,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\andeb\\source\\repos\\periodic-backup-service\\PeriodicBackupService\\PeriodicBackupService.csproj": {
-                "projectPath": "C:\\Users\\andeb\\source\\repos\\periodic-backup-service\\PeriodicBackupService\\PeriodicBackupService.csproj"
+              "C:\\Users\\andeb\\source\\repos\\periodic-backup-service\\PeriodicBackupService.Core\\PeriodicBackupService.Core.csproj": {
+                "projectPath": "C:\\Users\\andeb\\source\\repos\\periodic-backup-service\\PeriodicBackupService.Core\\PeriodicBackupService.Core.csproj"
               }
             }
           }
@@ -74,16 +84,6 @@
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
-      }
-    },
-    "C:\\Users\\andeb\\source\\repos\\periodic-backup-service\\PeriodicBackupService\\PeriodicBackupService.csproj": {
-      "restore": {
-        "projectUniqueName": "C:\\Users\\andeb\\source\\repos\\periodic-backup-service\\PeriodicBackupService\\PeriodicBackupService.csproj",
-        "projectName": "PeriodicBackupService",
-        "projectPath": "C:\\Users\\andeb\\source\\repos\\periodic-backup-service\\PeriodicBackupService\\PeriodicBackupService.csproj"
-      },
-      "frameworks": {
-        "net472": {}
       }
     }
   }

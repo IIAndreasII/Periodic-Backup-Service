@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Windows.Input;
 
-namespace PeriodicBackupService
+namespace GUI
 {
 	public class RelayCommand : ICommand
 	{

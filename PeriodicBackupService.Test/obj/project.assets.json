@@ -1226,13 +1226,13 @@
           "lib/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {}
         }
       },
-      "PeriodicBackupService/1.0.0": {
+      "PeriodicBackupService.Core/1.0.0": {
         "type": "project",
         "compile": {
-          "bin/placeholder/PeriodicBackupService.dll": {}
+          "bin/placeholder/PeriodicBackupService.Core.dll": {}
         },
         "runtime": {
-          "bin/placeholder/PeriodicBackupService.dll": {}
+          "bin/placeholder/PeriodicBackupService.Core.dll": {}
         }
       }
     }
@@ -4623,10 +4623,10 @@
         "system.xml.xpath.xmldocument.nuspec"
       ]
     },
-    "PeriodicBackupService/1.0.0": {
+    "PeriodicBackupService.Core/1.0.0": {
       "type": "project",
-      "path": "../PeriodicBackupService/PeriodicBackupService.csproj",
-      "msbuildProject": "../PeriodicBackupService/PeriodicBackupService.csproj"
+      "path": "../PeriodicBackupService.Core/PeriodicBackupService.Core.csproj",
+      "msbuildProject": "../PeriodicBackupService.Core/PeriodicBackupService.Core.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -4634,7 +4634,7 @@
       "Microsoft.NET.Test.Sdk >= 16.5.0",
       "NUnit >= 3.12.0",
       "NUnit3TestAdapter >= 3.16.1",
-      "PeriodicBackupService >= 1.0.0"
+      "PeriodicBackupService.Core >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -4664,8 +4664,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\andeb\\source\\repos\\periodic-backup-service\\PeriodicBackupService\\PeriodicBackupService.csproj": {
-              "projectPath": "C:\\Users\\andeb\\source\\repos\\periodic-backup-service\\PeriodicBackupService\\PeriodicBackupService.csproj"
+            "C:\\Users\\andeb\\source\\repos\\periodic-backup-service\\PeriodicBackupService.Core\\PeriodicBackupService.Core.csproj": {
+              "projectPath": "C:\\Users\\andeb\\source\\repos\\periodic-backup-service\\PeriodicBackupService.Core\\PeriodicBackupService.Core.csproj"
             }
           }
         }

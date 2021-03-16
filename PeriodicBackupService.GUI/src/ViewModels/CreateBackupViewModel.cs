@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Windows.Input;
 using GUI.Services;
-using PeriodicBackupService;
+using PeriodicBackupService.Models;
 
 namespace GUI.ViewModels
 {
@@ -13,14 +13,14 @@ namespace GUI.ViewModels
 
 		private ICommand createBackupCommand;
 
-		private readonly IBackupManager backupManager;
+		private readonly BackupDirectoryManagerModel backupManager;
 		private readonly IMessageBoxService messageBoxService;
 
 		private string backUpName;
 
 		#endregion
 
-		public CreateBackupViewModel(IBackupManager backupManager, IMessageBoxService messageBoxService,
+		public CreateBackupViewModel(BackupDirectoryManagerModel backupManager, IMessageBoxService messageBoxService,
 			IIOService ioService) : base(ioService)
 		{
 			this.backupManager = backupManager;
@@ -49,7 +49,9 @@ namespace GUI.ViewModels
 						backupManager.SourceDirectory = SourcePath;
 						backupManager.TargetDirectory = TargetPath;
 						backupManager.UseCompression = UseCompression;
-						var message = backupManager.CreateBackup(BackupName) ? "Backup successful!" : "Backup failed!";
+						string message = backupManager.CreateBackup(BackupName)
+							? "Backup successful!"
+							: "Backup failed!";
 						messageBoxService.ShowMessage(message);
 					},
 					p => ValidateProperties()));

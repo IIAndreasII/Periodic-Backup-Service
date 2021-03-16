@@ -21,9 +21,6 @@ C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.Consol
 C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.ConsoleApp\bin\Debug\netcoreapp3.1\PeriodicBackupService.ConsoleApp.runtimeconfig.dev.json
 C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.ConsoleApp\bin\Debug\netcoreapp3.1\PeriodicBackupService.ConsoleApp.dll
 C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.ConsoleApp\bin\Debug\netcoreapp3.1\PeriodicBackupService.ConsoleApp.pdb
-C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.ConsoleApp\bin\Debug\netcoreapp3.1\PeriodicBackupService.dll
-C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.ConsoleApp\bin\Debug\netcoreapp3.1\PeriodicBackupService.pdb
-C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.ConsoleApp\bin\Debug\netcoreapp3.1\PeriodicBackupService.dll.config
 C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.ConsoleApp\obj\Debug\netcoreapp3.1\PeriodicBackupService.ConsoleApp.csprojAssemblyReference.cache
 C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.ConsoleApp\obj\Debug\netcoreapp3.1\PeriodicBackupService.ConsoleApp.AssemblyInfoInputs.cache
 C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.ConsoleApp\obj\Debug\netcoreapp3.1\PeriodicBackupService.ConsoleApp.AssemblyInfo.cs
@@ -32,3 +29,6 @@ C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.Consol
 C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.ConsoleApp\obj\Debug\netcoreapp3.1\PeriodicBackupService.ConsoleApp.dll
 C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.ConsoleApp\obj\Debug\netcoreapp3.1\PeriodicBackupService.ConsoleApp.pdb
 C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.ConsoleApp\obj\Debug\netcoreapp3.1\PeriodicBackupService.ConsoleApp.genruntimeconfig.cache
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.ConsoleApp\bin\Debug\netcoreapp3.1\PeriodicBackupService.Core.dll
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.ConsoleApp\bin\Debug\netcoreapp3.1\PeriodicBackupService.Core.pdb
+C:\Users\andeb\source\repos\periodic-backup-service\PeriodicBackupService.ConsoleApp\bin\Debug\netcoreapp3.1\PeriodicBackupService.Core.dll.config

@@ -86,11 +86,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="src\Constants.cs" />
-    <Compile Include="src\Models\BackupProcessModel.cs" />
-    <Compile Include="src\Models\Factories\BackupProcessModelFactory.cs" />
-    <Compile Include="src\Models\Factories\IProcessFactory.cs" />
-    <Compile Include="src\Models\IProcessModel.cs" />
     <Compile Include="src\RelayCommand.cs" />
     <Compile Include="src\Services\ChooseDirectoryService.cs" />
     <Compile Include="src\Services\ConfigureBackupProcessWindowService.cs" />
@@ -151,8 +146,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PeriodicBackupService\PeriodicBackupService.csproj">
-      <Project>{617688c9-c281-4b94-86e9-f75e9a28624a}</Project>
+    <ProjectReference Include="..\PeriodicBackupService\PeriodicBackupService\PeriodicBackupService.csproj">
+      <Project>{5025eae8-977f-47c8-85a4-d95bfe472f7a}</Project>
       <Name>PeriodicBackupService</Name>
     </ProjectReference>
   </ItemGroup>

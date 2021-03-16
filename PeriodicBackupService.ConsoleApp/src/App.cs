@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Timers;
+using PeriodicBackupService.Core;
 
 namespace PeriodicBackupService.ConsoleApp
 {

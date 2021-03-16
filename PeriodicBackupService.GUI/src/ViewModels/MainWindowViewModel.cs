@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
-using GUI.Models.Factories;
 using GUI.Services;
-using PeriodicBackupService;
+using PeriodicBackupService.Models;
+using PeriodicBackupService.Models.Factories;
 
 namespace GUI.ViewModels
 {
@@ -17,12 +17,10 @@ namespace GUI.ViewModels
 
 		public MainWindowViewModel(IIOService ioService)
 		{
-			PageViewModels.Add(new CreateBackupViewModel(new BackupDirectoryManager(), new InfoMessageBoxService(),
+			PageViewModels.Add(new CreateBackupViewModel(new BackupDirectoryManagerModel(), new InfoMessageBoxService(),
 				ioService));
 			PageViewModels.Add(new BackupProcessesViewModel(new BackupProcessModelFactory(),
 				new ConfigureBackupProcessWindowService(), ioService));
-
-			//CurrentPageViewModel = PageViewModels[0];
 		}
 
 
