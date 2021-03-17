@@ -272,7 +272,6 @@ namespace GUI.ViewModels
 			}
 		}
 
-
 		private bool ValidateParams()
 		{
 			return

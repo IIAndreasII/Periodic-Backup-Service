@@ -107,6 +107,15 @@
             Add
         </Button>
 
+        <!-- Edit process -->
+        <Button 
+            Grid.Column="2" Grid.Row="1" Margin="1,8,20,10" Height="40"
+            BorderThickness="0"
+            FontSize="15"
+            
+            Content="Edit"
+            Visibility="{Binding Path=ShowProcessButtons, Converter={StaticResource BoolToVis}}"/>
+
         <!-- Toggle process -->
         <Button 
             Grid.Column="1" Grid.Row="1" Margin="1,8,20,10" Height="40"
