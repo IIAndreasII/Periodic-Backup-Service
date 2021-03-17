@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Timers;
 using PeriodicBackupService.Core;
 
@@ -72,7 +73,7 @@ namespace PeriodicBackupService.Models
 			backupManager = new BackupDirectoryManager(sourceDir, targetDir, maxNbrBackups, useCompression);
 			this.interval = interval == 0 ? TimeUtils.HoursToMillis(1) : interval;
 			SetUpTimer();
-			DoBackup();
+			Task.Run(DoBackup);
 		}
 
 		private void OnTimedEvent(object sender, EventArgs args)

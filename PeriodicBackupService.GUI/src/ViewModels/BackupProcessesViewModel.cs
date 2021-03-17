@@ -184,11 +184,11 @@ namespace GUI.ViewModels
 			{
 				return confirmConfigurationCommand ?? (confirmConfigurationCommand = new RelayCommand(p =>
 					{
+						windowService.CloseWindow();
 						ProcessModels.Add(
 							processModelFactory.Create(ProcessName, SourcePath, TargetPath, MaxNbrBackups,
 								Interval, intervalUnit, UseCompression.ToString()));
 
-						windowService.CloseWindow();
 						OnPropertyChanged(nameof(ProcessModels));
 					},
 					p => ValidateParams()));
