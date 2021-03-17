@@ -10,7 +10,7 @@ namespace PeriodicBackupService.Models
 		private string name;
 		private string status = Constants.RUNNING;
 		private string lastBackupStatus = Constants.OK;
-		private string nextBackupTime;
+		private DateTime nextBackupTime;
 
 		private Timer timer;
 		private Stopwatch stopwatch;
@@ -48,12 +48,18 @@ namespace PeriodicBackupService.Models
 			}
 		}
 
-		public string NextBackupTime
+
+		public DateTime LastBackupStatusTime { get; set; }
+
+		public string NextBackup => NextBackupTime.ToLongTimeString();
+
+		public DateTime NextBackupTime
 		{
 			get => nextBackupTime;
 			set
 			{
 				nextBackupTime = value;
+				OnPropertyChanged(nameof(NextBackup));
 				OnPropertyChanged(nameof(NextBackupTime));
 			}
 		}
@@ -92,13 +98,11 @@ namespace PeriodicBackupService.Models
 			timer.Enabled = !timer.Enabled;
 			if (timer.Enabled)
 			{
-				NextBackupTime = DateTime.Now.AddMilliseconds(interval - stopwatch.ElapsedMilliseconds)
-					.ToLongTimeString();
+				NextBackupTime = DateTime.Now.AddMilliseconds(interval - stopwatch.ElapsedMilliseconds);
 				stopwatch.Start();
 			}
 			else
 			{
-				NextBackupTime = Constants.EMPTY_TIME;
 				stopwatch.Stop();
 			}
 
@@ -107,9 +111,10 @@ namespace PeriodicBackupService.Models
 
 		private void DoBackup()
 		{
+			LastBackupStatusTime = DateTime.Now;
 			LastBackupStatus =
 				$"{(backupManager.CreateBackup() ? Constants.OK : Constants.NOK)} - {DateTime.Now.ToLongTimeString()}";
-			NextBackupTime = DateTime.Now.AddMilliseconds(interval).ToLongTimeString();
+			NextBackupTime = DateTime.Now.AddMilliseconds(interval);
 			stopwatch = Stopwatch.StartNew();
 		}
 	}
