@@ -51,6 +51,8 @@ namespace PeriodicBackupService.Models
 
 
 		public DateTime LastBackupStatusTime { get; set; }
+		public string SourcePath { get; }
+		public string TargetPath { get; }
 
 		public string NextBackup => NextBackupTime.ToLongTimeString();
 
@@ -66,14 +68,19 @@ namespace PeriodicBackupService.Models
 		}
 
 
-		public BackupProcessModel(string name, string sourceDir, string targetDir, int maxNbrBackups, double interval,
-			bool useCompression)
+		public BackupProcessModel(string name, string sourcePath, string targetPath, int maxNbrBackups, double interval,
+			bool useCompression, bool backupOnInit = true)
 		{
 			Name = name;
-			backupManager = new BackupDirectoryManager(sourceDir, targetDir, maxNbrBackups, useCompression);
+			SourcePath = sourcePath;
+			TargetPath = targetPath;
+			backupManager = new BackupDirectoryManager(sourcePath, targetPath, maxNbrBackups, useCompression);
 			this.interval = interval == 0 ? TimeUtils.HoursToMillis(1) : interval;
 			SetUpTimer();
-			Task.Run(DoBackup);
+			if (backupOnInit)
+			{
+				Task.Run(DoBackup);
+			}
 		}
 
 		private void OnTimedEvent(object sender, EventArgs args)

@@ -10,6 +10,8 @@ namespace PeriodicBackupService.Models
 		DateTime NextBackupTime { get; set; }
 		string LastBackupStatus { get; set; }
 		DateTime LastBackupStatusTime { get; set; }
+		string SourcePath { get; }
+		string TargetPath { get; }
 
 		void Toggle();
 	}

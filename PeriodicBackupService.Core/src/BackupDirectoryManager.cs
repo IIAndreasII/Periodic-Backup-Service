@@ -6,40 +6,39 @@ namespace PeriodicBackupService.Core
 {
 	public class BackupDirectoryManager : IBackupManager
 	{
-		public const string SOURCE_DIR = @"C:\Users\andeb\AppData\LocalLow\IronGate\Valheim\worlds";
-		public const string TARGET_DIR = @"C:\Users\andeb\Desktop\ValheimWorldBackups";
-
-
 		public int MaxNumberOfBackups { get; set; }
-		public string SourceDirectory { get; set; }
-		public string TargetDirectory { get; set; }
+		public string SourcePath { get; set; }
+		public string TargetPath { get; set; }
 		public bool UseCompression { get; set; }
 
-		/// <summary>
-		/// Should only be used 
-		/// </summary>
 		public BackupDirectoryManager()
 		{
 			MaxNumberOfBackups = 0;
 		}
 
-		public BackupDirectoryManager(string sourceDirectory, string targetDirectory, int maxNbrBackups = 0,
+		public BackupDirectoryManager(string sourcePath, string targetPath, int maxNbrBackups = 0,
 			bool compress = true)
 		{
-			SourceDirectory = string.IsNullOrEmpty(sourceDirectory) ? SOURCE_DIR : sourceDirectory;
-			TargetDirectory = string.IsNullOrEmpty(targetDirectory) ? TARGET_DIR : targetDirectory;
+			if (string.IsNullOrEmpty(sourcePath) || string.IsNullOrEmpty(targetPath))
+			{
+				throw new ArgumentException("Paths must not me null or empty!");
+			}
+
+			SourcePath = sourcePath;
+			TargetPath = targetPath;
+
 			MaxNumberOfBackups = maxNbrBackups;
 			UseCompression = compress;
 		}
 
 		public bool CreateBackup()
 		{
-			return BackupDirectory(SourceDirectory, TargetDirectory, MaxNumberOfBackups, UseCompression);
+			return BackupDirectory(SourcePath, TargetPath, MaxNumberOfBackups, UseCompression);
 		}
 
 		public bool CreateBackup(string name)
 		{
-			return BackupDirectory(SourceDirectory, TargetDirectory, MaxNumberOfBackups, UseCompression, name);
+			return BackupDirectory(SourcePath, TargetPath, MaxNumberOfBackups, UseCompression, name);
 		}
 
 		private static bool BackupDirectory(string sourceDir, string targetDir, int maxNbrBackups, bool useCompression,
@@ -62,22 +61,22 @@ namespace PeriodicBackupService.Core
 			if (string.IsNullOrEmpty(name))
 			{
 				// Create directory with current date
-				var timeString =
+				string timeString =
 					DateTime.Now.ToString("u").Replace('-', '_')
 						.Replace(':', '-'); // Make Windows accept directory name
 				name = timeString.Remove(timeString.Length - 1, 1);
 			}
 
-			var backupDir = Path.Combine(targetDir, name);
+			string backupDir = Path.Combine(targetDir, name);
 			if (!Directory.Exists(backupDir))
 			{
 				Console.WriteLine("\nCreating backup directory...");
 				Directory.CreateDirectory(backupDir);
 			}
 
-			foreach (var file in Directory.GetFiles(sourceDir))
+			foreach (string file in Directory.GetFiles(sourceDir))
 			{
-				var destFile = Path.Combine(backupDir, Path.GetFileName(file));
+				string destFile = Path.Combine(backupDir, Path.GetFileName(file));
 				Console.WriteLine($"\nCopying \"{file}\" to {backupDir}");
 				File.Copy(file, destFile, true);
 			}
@@ -96,7 +95,7 @@ namespace PeriodicBackupService.Core
 		{
 			try
 			{
-				var archiveName = directory + ".zip";
+				string archiveName = directory + ".zip";
 				Console.WriteLine($"\nCompressing directory \"{directory}\" into \"{archiveName}\"");
 				ZipFile.CreateFromDirectory(directory, archiveName);
 
@@ -131,7 +130,7 @@ namespace PeriodicBackupService.Core
 			try
 			{
 				Array.Sort(fileInfos, (left, right) => left.CreationTime.CompareTo(right.CreationTime));
-				for (var i = fileInfos.Length - maxNbrBackups; i > 0; i--)
+				for (int i = fileInfos.Length - maxNbrBackups; i > 0; i--)
 				{
 					Console.WriteLine($"Deleting \"{fileInfos[i - 1].Name}\"\n");
 					fileInfos[i - 1].Delete();

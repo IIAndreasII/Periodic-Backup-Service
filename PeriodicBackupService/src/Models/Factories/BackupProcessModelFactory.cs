@@ -15,7 +15,8 @@ namespace PeriodicBackupService.Models.Factories
 				: TimeUtils.MinutesToMillis(int.Parse(intervalString));
 
 			return new BackupProcessModel(data[0] as string, data[1] as string, data[2] as string, maxNbrBackups,
-				interval, bool.Parse(ParseStringOrDefault(data[6], true.ToString())));
+				interval, bool.Parse(ParseStringOrDefault(data[6], true.ToString())),
+				bool.Parse(ParseStringOrDefault(data[7], true.ToString())));
 		}
 
 		private static string ParseStringOrDefault(object o, string defaultValue = "")

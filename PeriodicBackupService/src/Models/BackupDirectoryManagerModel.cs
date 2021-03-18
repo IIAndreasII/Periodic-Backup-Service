@@ -21,16 +21,16 @@ namespace PeriodicBackupService.Models
 			return backupManager.CreateBackup(name);
 		}
 
-		public string SourceDirectory
+		public string SourcePath
 		{
-			get => backupManager.SourceDirectory;
-			set => backupManager.SourceDirectory = value;
+			get => backupManager.SourcePath;
+			set => backupManager.SourcePath = value;
 		}
 
-		public string TargetDirectory
+		public string TargetPath
 		{
-			get => backupManager.TargetDirectory;
-			set => backupManager.TargetDirectory = value;
+			get => backupManager.TargetPath;
+			set => backupManager.TargetPath = value;
 		}
 
 		public bool UseCompression

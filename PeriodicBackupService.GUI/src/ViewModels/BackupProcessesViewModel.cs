@@ -21,6 +21,8 @@ namespace GUI.ViewModels
 		private int lastBackupSortingFactor = -1;
 		private int statusSortingFactor = -1;
 
+		private bool isAddProcess = true;
+
 		private string intervalUnit;
 		private string interval;
 		private string processName;
@@ -28,6 +30,7 @@ namespace GUI.ViewModels
 		private string toggleButtonText;
 
 		private ICommand addProcessCommand;
+		private ICommand editProcessCommand;
 		private ICommand toggleProcessCommand;
 		private ICommand terminateProcessCommand;
 		private ICommand selectionChangedCommand;
@@ -115,6 +118,16 @@ namespace GUI.ViewModels
 			}
 		}
 
+		public bool IsAddProcess
+		{
+			get => isAddProcess;
+			set
+			{
+				isAddProcess = value;
+				OnPropertyChanged(nameof(IsAddProcess));
+			}
+		}
+
 		public bool ShowProcessButtons => SelectedIndex > -1;
 
 		public List<string> ComboBoxContent { get; } = new List<string> {Constants.MINUTES, Constants.HOURS};
@@ -135,9 +148,27 @@ namespace GUI.ViewModels
 			{
 				return addProcessCommand ?? (addProcessCommand = new RelayCommand(p =>
 				{
+					IsAddProcess = true;
 					ClearFields();
 					windowService.OpenWindow(this);
 				}));
+			}
+		}
+
+		public ICommand EditProcessCommand
+		{
+			get
+			{
+				return editProcessCommand ?? (editProcessCommand =
+					new RelayCommand(p =>
+					{
+						IsAddProcess = false;
+						SourcePath = ProcessModels[SelectedIndex].SourcePath;
+						TargetPath = ProcessModels[SelectedIndex].TargetPath;
+						ProcessName = ProcessModels[SelectedIndex].Name;
+
+						windowService.OpenWindow(this);
+					}, p => SelectedIndex > -1));
 			}
 		}
 
@@ -185,9 +216,21 @@ namespace GUI.ViewModels
 				return confirmConfigurationCommand ?? (confirmConfigurationCommand = new RelayCommand(p =>
 					{
 						windowService.CloseWindow();
-						ProcessModels.Add(
-							processModelFactory.Create(ProcessName, SourcePath, TargetPath, MaxNbrBackups,
-								Interval, intervalUnit, UseCompression.ToString()));
+
+						IProcessModel process = processModelFactory.Create(ProcessName, SourcePath, TargetPath,
+							MaxNbrBackups,
+							Interval, intervalUnit, UseCompression.ToString(), true.ToString());
+
+						if (!isAddProcess)
+						{
+							int tempIndex = SelectedIndex;
+							ProcessModels.RemoveAt(tempIndex);
+							ProcessModels.Insert(tempIndex > -1 ? tempIndex : 0, process);
+						}
+						else
+						{
+							ProcessModels.Add(process);
+						}
 
 						OnPropertyChanged(nameof(ProcessModels));
 					},

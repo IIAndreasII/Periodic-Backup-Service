@@ -46,8 +46,8 @@ namespace GUI.ViewModels
 			{
 				return createBackupCommand ?? (createBackupCommand = new RelayCommand(p =>
 					{
-						backupManager.SourceDirectory = SourcePath;
-						backupManager.TargetDirectory = TargetPath;
+						backupManager.SourcePath = SourcePath;
+						backupManager.TargetPath = TargetPath;
 						backupManager.UseCompression = UseCompression;
 						string message = backupManager.CreateBackup(BackupName)
 							? "Backup successful!"
