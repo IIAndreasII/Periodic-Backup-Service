@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Windows.Input;
 using GUI.Services;
 using PeriodicBackupService;
@@ -15,6 +17,13 @@ namespace GUI.ViewModels
 
 		private int selectedIndex;
 
+		private int nameSortingFactor = -1;
+		private int nextTimeSortingFactor = -1;
+		private int lastBackupSortingFactor = -1;
+		private int statusSortingFactor = -1;
+
+		private bool isAddProcess = true;
+
 		private string intervalUnit;
 		private string interval;
 		private string processName;
@@ -22,12 +31,19 @@ namespace GUI.ViewModels
 		private string toggleButtonText;
 
 		private ICommand addProcessCommand;
+		private ICommand editProcessCommand;
+
 		private ICommand toggleProcessCommand;
 		private ICommand terminateProcessCommand;
 		private ICommand selectionChangedCommand;
 
 		private ICommand confirmConfigurationCommand;
 		private ICommand cancelConfigurationCommand;
+
+		private ICommand sortNameCommand;
+		private ICommand sortNextBackupCommand;
+		private ICommand sortLastBackupCommand;
+		private ICommand sortStatusCommand;
 
 		private readonly IProcessFactory processModelFactory;
 		private readonly IWindowService windowService;
@@ -104,6 +120,16 @@ namespace GUI.ViewModels
 			}
 		}
 
+		public bool IsAddProcess
+		{
+			get => isAddProcess;
+			set
+			{
+				isAddProcess = value;
+				OnPropertyChanged(nameof(IsAddProcess));
+			}
+		}
+
 		public bool ShowProcessButtons => SelectedIndex > -1;
 
 		public List<string> ComboBoxContent { get; } = new List<string> {Constants.MINUTES, Constants.HOURS};
@@ -124,9 +150,27 @@ namespace GUI.ViewModels
 			{
 				return addProcessCommand ?? (addProcessCommand = new RelayCommand(p =>
 				{
+					IsAddProcess = true;
 					ClearFields();
 					windowService.OpenWindow(this);
 				}));
+			}
+		}
+
+		public ICommand EditProcessCommand
+		{
+			get
+			{
+				return editProcessCommand ?? (editProcessCommand =
+					new RelayCommand(p =>
+					{
+						IsAddProcess = false;
+						SourcePath = ProcessModels[SelectedIndex].SourcePath;
+						TargetPath = ProcessModels[SelectedIndex].TargetPath;
+						ProcessName = ProcessModels[SelectedIndex].Name;
+
+						windowService.OpenWindow(this);
+					}, p => SelectedIndex > -1));
 			}
 		}
 
@@ -173,11 +217,23 @@ namespace GUI.ViewModels
 			{
 				return confirmConfigurationCommand ?? (confirmConfigurationCommand = new RelayCommand(p =>
 					{
-						ProcessModels.Add(
-							processModelFactory.Create(ProcessName, SourcePath, TargetPath, MaxNbrBackups,
-								Interval, intervalUnit, UseCompression.ToString()));
-
 						windowService.CloseWindow();
+
+						IProcessModel process = processModelFactory.Create(ProcessName, SourcePath, TargetPath,
+							MaxNbrBackups,
+							Interval, intervalUnit, UseCompression.ToString(), true.ToString());
+
+						if (!isAddProcess)
+						{
+							int tempIndex = SelectedIndex;
+							ProcessModels.RemoveAt(tempIndex);
+							ProcessModels.Insert(tempIndex > -1 ? tempIndex : 0, process);
+						}
+						else
+						{
+							ProcessModels.Add(process);
+						}
+
 						OnPropertyChanged(nameof(ProcessModels));
 					},
 					p => ValidateParams()));
@@ -191,6 +247,72 @@ namespace GUI.ViewModels
 				return cancelConfigurationCommand ?? (cancelConfigurationCommand = new RelayCommand(p =>
 				{
 					windowService.CloseWindow();
+				}));
+			}
+		}
+
+		public ICommand SortNameCommand
+		{
+			get
+			{
+				return sortNameCommand ?? (sortNameCommand = new RelayCommand(p =>
+				{
+					nameSortingFactor = -nameSortingFactor;
+					SortProcessModels((left, right) =>
+						nameSortingFactor * string.Compare(left.Name, right.Name, StringComparison.Ordinal));
+				}));
+			}
+		}
+
+		public ICommand SortNextBackupCommand
+		{
+			get
+			{
+				return sortNextBackupCommand ?? (sortNextBackupCommand = new RelayCommand(p =>
+				{
+					nextTimeSortingFactor = -nextTimeSortingFactor;
+					SortProcessModels((left, right) =>
+						nextTimeSortingFactor * DateTime.Compare(left.NextBackupTime, right.NextBackupTime));
+				}));
+			}
+		}
+
+		public ICommand SortLastBackupCommand
+		{
+			get
+			{
+				return sortLastBackupCommand ?? (sortLastBackupCommand = new RelayCommand(p =>
+				{
+					lastBackupSortingFactor = -lastBackupSortingFactor;
+					SortProcessModels((left, right) =>
+					{
+						if (left.LastBackupStatus.Contains(Constants.NOK))
+						{
+							return -1;
+						}
+
+						if (right.LastBackupStatus.Contains(Constants.NOK))
+						{
+							return 1;
+						}
+
+						return lastBackupSortingFactor *
+						       DateTime.Compare(left.LastBackupStatusTime, right.LastBackupStatusTime);
+					});
+				}));
+			}
+		}
+
+		public ICommand SortStatusCommand
+		{
+			get
+			{
+				return sortStatusCommand ?? (sortStatusCommand = new RelayCommand(p =>
+				{
+					statusSortingFactor = -statusSortingFactor;
+					SortProcessModels((left, right) => statusSortingFactor *
+					                                   string.Compare(left.Status, right.Status,
+						                                   StringComparison.Ordinal));
 				}));
 			}
 		}
@@ -221,6 +343,17 @@ namespace GUI.ViewModels
 			MaxNbrBackups = string.Empty;
 			UseCompression = true;
 			ProcessName = string.Empty;
+		}
+
+		private void SortProcessModels(Comparison<IProcessModel> comparison)
+		{
+			var tempList = ProcessModels.ToList();
+
+			tempList.Sort(comparison);
+
+			ProcessModels.Clear();
+			ProcessModels.AddRange(tempList);
+			OnPropertyChanged(nameof(ProcessModels));
 		}
 	}
 }

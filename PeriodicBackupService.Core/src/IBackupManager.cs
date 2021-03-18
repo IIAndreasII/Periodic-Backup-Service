@@ -6,9 +6,9 @@
 
 		bool CreateBackup(string name);
 
-		string SourceDirectory { get; set; }
+		string SourcePath { get; set; }
 
-		string TargetDirectory { get; set; }
+		string TargetPath { get; set; }
 
 		bool UseCompression { get; set; }
 	}

@@ -18,17 +18,17 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="5*"/>
             <RowDefinition Height="Auto"/>
-
         </Grid.RowDefinitions>
 
         <!-- Active processes -->
         <ListView
-            Grid.Column="0" Grid.ColumnSpan="4" Margin="1, 2"
+            Grid.Column="0" Grid.ColumnSpan="5" Margin="1, 2"
             ItemsSource="{Binding Path=ProcessModels}"
             SelectedIndex="{Binding Path=SelectedIndex, Mode=TwoWay}">
 
@@ -57,26 +57,26 @@
             <ListView.View>
                 <GridView AllowsColumnReorder="True">
 
-                    <GridViewColumn Header="Name"
-                                    Width="200">
+                    <GridViewColumn Width="200">
+                        <GridViewColumnHeader Content="Name" Command="{Binding Path=SortNameCommand}"/>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Name}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                     
-                    <GridViewColumn Header="Next backup"
-                                    Width="90">
+
+                    <GridViewColumn Width="90">
+                        <GridViewColumnHeader Content="Next backup" Command="{Binding Path=SortNextBackupCommand}"/>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding NextBackupTime}" TextAlignment="Center"/>
+                                <TextBlock Text="{Binding NextBackup}" TextAlignment="Center"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn Header="Last Backup"
-                                    Width="100">
+                    <GridViewColumn Width="100">
+                        <GridViewColumnHeader Content="Last Backup" Command="{Binding Path=SortLastBackupCommand}"/>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding LastBackupStatus}" TextAlignment="Center"/>
@@ -84,8 +84,8 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn Header="Status"
-                                    Width="100">
+                    <GridViewColumn Width="100">
+                        <GridViewColumnHeader Content="Status" Command="{Binding Path=SortStatusCommand}"/>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Status}" TextAlignment="Center"/>
@@ -100,16 +100,26 @@
 
         <!-- Add process -->
         <Button
-            Grid.Column="3" Grid.Row="1" Margin="15,10" Height="40"
+            Grid.Column="4" Grid.Row="1" Margin="20,8, 10, 10" Height="40"
             BorderThickness="0"
             FontSize="15"
             Command="{Binding Path=AddProcessCommand}">
             Add
         </Button>
 
+        <!-- Edit process -->
+        <Button 
+            Grid.Column="2" Grid.Row="1" Margin="1,8,20,10" Height="40"
+            BorderThickness="0"
+            FontSize="15"
+            Command="{Binding Path=EditProcessCommand}"
+            Content="Edit"
+            Visibility="{Binding Path=ShowProcessButtons, Converter={StaticResource BoolToVis}}"/>
+
         <!-- Toggle process -->
         <Button 
-            Grid.Column="1" Grid.Row="1" Margin="15,10" Height="40"
+            Grid.Column="1" Grid.Row="1" Margin="1,8,20,10" Height="40"
+            BorderThickness="0"
             FontSize="15"
             Command="{Binding Path=ToggleProcessCommand}"
             Content="{Binding Path=ToggleButtonText}"
@@ -117,7 +127,8 @@
 
         <!-- Terminate process -->
         <Button 
-            Grid.Column="0" Grid.Row="1" Margin="15,10" Height="40"
+            Grid.Column="0" Grid.Row="1" Margin="1,8, 20, 10" Height="40"
+            BorderThickness="0"
             FontSize="15"
             Command="{Binding Path=TerminateProcessCommand}"
             Visibility="{Binding Path=ShowProcessButtons, Converter={StaticResource BoolToVis}}">

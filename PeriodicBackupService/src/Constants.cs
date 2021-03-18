@@ -10,6 +10,5 @@
 		public const string NOK = "NOK";
 		public const string SUSPEND = "Suspend";
 		public const string RESUME = "Resume";
-		public const string STATUS = "Status";
 	}
 }

@@ -8,9 +8,14 @@
         d:DataContext="{d:DesignInstance Type=vm:BackupProcessesViewModel}"
         Title="Configure Process" Height="300" Width="600"
         ResizeMode="NoResize">
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.2*"/>
+
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -19,13 +24,14 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="0.5*"/>
             <ColumnDefinition Width="0.9*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition/>
             <ColumnDefinition Width="0.5*"/>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -35,38 +41,44 @@
         <Label
             Grid.Column="0" Grid.Row="1"
             HorizontalAlignment="Right"
-            FontSize="15">
+            FontSize="15"
+            Visibility="{Binding IsAddProcess, Converter={StaticResource BoolToVis}}">
             *Source directory:
         </Label>
         <TextBox
             Text="{Binding Path=SourcePath, Mode=TwoWay}"
             Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="5"
             VerticalAlignment="Center"
-            FontSize="15"/>
+            FontSize="15"
+            Visibility="{Binding IsAddProcess, Converter={StaticResource BoolToVis}}"/>
         <Button
             Grid.Column="6" Grid.Row="1" Width="65" Margin="5"
             BorderThickness="0"
             VerticalAlignment="Center" HorizontalAlignment="Left"
-            Command="{Binding Path=ChooseSourcePathCommand}">
+            Command="{Binding Path=ChooseSourcePathCommand}"
+            Visibility="{Binding IsAddProcess, Converter={StaticResource BoolToVis}}">
             Browse...
         </Button>
 
         <!-- Enter target directory -->
         <Label Grid.Column="0" Grid.Row="2"
                HorizontalAlignment="Right"
-               FontSize="15">
+               FontSize="15"
+               Visibility="{Binding IsAddProcess, Converter={StaticResource BoolToVis}}">
             *Target directory:
         </Label>
         <TextBox 
              Text="{Binding Path=TargetPath, Mode=TwoWay}"
              Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="5"
              VerticalAlignment="Center"
-             FontSize="15"/>
+             FontSize="15"
+             Visibility="{Binding IsAddProcess, Converter={StaticResource BoolToVis}}"/>
         <Button 
             Grid.Column="6" Grid.Row="2"  Width="65" Margin="5"
             BorderThickness="0"
             VerticalAlignment="Center" HorizontalAlignment="Left"
-            Command="{Binding Path=ChooseTargetPathCommand}">
+            Command="{Binding Path=ChooseTargetPathCommand}"
+            Visibility="{Binding IsAddProcess, Converter={StaticResource BoolToVis}}">
             Browse...
         </Button>
 
@@ -133,19 +145,20 @@
 
         <!-- Confirm -->
         <Button
-            Grid.Column="5" Grid.Row="8" Margin="0,10,5,10"
+            Grid.Column="5" Grid.Row="8" Margin="0,0,10,10"
             BorderThickness="0"
             Command="{Binding Path=ConfirmConfigurationCommand}"
-            FontSize="15">
+            FontSize="15" Height="23" VerticalAlignment="Bottom">
             Confirm
         </Button>
 
         <!-- Cancel -->
         <Button
-            Grid.Column="6" Grid.Row="8" Margin="0,10,5,10"
+            Grid.Column="6" Grid.Row="8" Margin="0,10,10,10"
             BorderThickness="0"
             Command="{Binding Path=CancelConfigurationCommand}"
-            FontSize="15">
+            FontSize="15"
+            VerticalAlignment="Bottom">
             Cancel
         </Button>
 
