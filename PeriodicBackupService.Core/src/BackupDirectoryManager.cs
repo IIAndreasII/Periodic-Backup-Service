@@ -60,7 +60,7 @@ namespace PeriodicBackupService.Core
 
 			if (string.IsNullOrEmpty(name))
 			{
-				// Create directory with current date
+				// Create directory with current date and time
 				string timeString =
 					DateTime.Now.ToString("u").Replace('-', '_')
 						.Replace(':', '-'); // Make Windows accept directory name
@@ -86,7 +86,10 @@ namespace PeriodicBackupService.Core
 				CompressDirectory(backupDir);
 			}
 
-			CleanBackupDirectory(targetDir, maxNbrBackups);
+			if (maxNbrBackups > 0)
+			{
+				CleanBackupDirectory(targetDir, maxNbrBackups);
+			}
 
 			return true;
 		}
@@ -115,13 +118,9 @@ namespace PeriodicBackupService.Core
 
 		private static void CleanBackupDirectory(string targetDir, int maxNbrBackups)
 		{
-			if (maxNbrBackups <= 0)
-			{
-				return;
-			}
+			var fileSystemInfos = new DirectoryInfo(targetDir).GetFileSystemInfos();
 
-			var fileInfos = new DirectoryInfo(targetDir).GetFiles();
-			if (fileInfos.Length <= maxNbrBackups)
+			if (fileSystemInfos.Length <= maxNbrBackups)
 			{
 				return;
 			}
@@ -129,17 +128,25 @@ namespace PeriodicBackupService.Core
 			Console.WriteLine("Cleaning up backup directory...\n");
 			try
 			{
-				Array.Sort(fileInfos, (left, right) => left.CreationTime.CompareTo(right.CreationTime));
-				for (int i = fileInfos.Length - maxNbrBackups; i > 0; i--)
+				Array.Sort(fileSystemInfos, (left, right) => left.CreationTime.CompareTo(right.CreationTime));
+
+				for (int i = fileSystemInfos.Length - maxNbrBackups; i > 0; i--)
 				{
-					Console.WriteLine($"Deleting \"{fileInfos[i - 1].Name}\"\n");
-					fileInfos[i - 1].Delete();
+					Console.WriteLine($"Deleting \"{fileSystemInfos[i - 1].FullName}\"\n");
+
+					if (Directory.Exists(fileSystemInfos[i - 1].FullName))
+					{
+						Directory.Delete(fileSystemInfos[i - 1].FullName, true);
+					}
+					else
+					{
+						fileSystemInfos[i - 1].Delete();
+					}
 				}
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine(e);
-				Console.WriteLine("\nCleaning up backup directory failed!\n");
+				Console.WriteLine($"{e}\nCleaning up backup directory failed!\n");
 			}
 
 			Console.WriteLine("Cleaning up backup directory succeeded!\n");
