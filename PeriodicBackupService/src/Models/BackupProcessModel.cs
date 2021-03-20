@@ -101,6 +101,11 @@ namespace PeriodicBackupService.Models
 			timer?.Dispose();
 		}
 
+		public void ForceAction()
+		{
+			DoBackup();
+		}
+
 		public void Toggle()
 		{
 			timer.Enabled = !timer.Enabled;

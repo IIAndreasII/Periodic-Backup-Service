@@ -13,6 +13,8 @@ namespace PeriodicBackupService.Models
 		string SourcePath { get; }
 		string TargetPath { get; }
 
+		void ForceAction();
+
 		void Toggle();
 	}
 }

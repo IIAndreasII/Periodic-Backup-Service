@@ -13,6 +13,8 @@ namespace GUI.ViewModels
 {
 	public class BackupProcessesViewModel : IOViewModelBase, IPageViewModel
 	{
+		#region Fields
+
 		public string Name => "Backup processes";
 
 		private int selectedIndex;
@@ -35,6 +37,7 @@ namespace GUI.ViewModels
 
 		private ICommand toggleProcessCommand;
 		private ICommand terminateProcessCommand;
+		private ICommand forceBackupCommand;
 		private ICommand selectionChangedCommand;
 
 		private ICommand confirmConfigurationCommand;
@@ -50,6 +53,10 @@ namespace GUI.ViewModels
 
 		private ObservableCollection<IProcessModel> processModels;
 
+		#endregion
+
+		#region Constructors
+
 		public BackupProcessesViewModel(IProcessFactory processModelFactory, IWindowService windowService,
 			IIOService ioService) : base(ioService)
 		{
@@ -58,6 +65,10 @@ namespace GUI.ViewModels
 			IntervalUnit = ComboBoxContent[0];
 			SelectedIndex = -1;
 		}
+
+		#endregion
+
+		#region Properties
 
 		public string ToggleButtonText
 		{
@@ -144,6 +155,10 @@ namespace GUI.ViewModels
 			}
 		}
 
+		#endregion
+
+		#region Commands
+
 		public ICommand AddProcessCommand
 		{
 			get
@@ -199,6 +214,15 @@ namespace GUI.ViewModels
 						OnPropertyChanged(nameof(ProcessModels));
 					},
 					p => SelectedIndex < ProcessModels.Count && SelectedIndex > -1));
+			}
+		}
+
+		public ICommand ForceBackupCommand
+		{
+			get
+			{
+				return forceBackupCommand ?? (forceBackupCommand =
+					new RelayCommand(p => { ProcessModels[SelectedIndex].ForceAction(); }, p => SelectedIndex > -1));
 			}
 		}
 
@@ -317,6 +341,10 @@ namespace GUI.ViewModels
 			}
 		}
 
+		#endregion
+
+		#region Helper methods
+
 		private bool ValidateParams()
 		{
 			return
@@ -355,5 +383,7 @@ namespace GUI.ViewModels
 			ProcessModels.AddRange(tempList);
 			OnPropertyChanged(nameof(ProcessModels));
 		}
+
+		#endregion
 	}
 }
