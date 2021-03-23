@@ -89,7 +89,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="src\DataTemplateSelectors\LastBackupDataTemplateSelector.cs" />
     <Compile Include="src\RelayCommand.cs" />
     <Compile Include="src\Services\ChooseDirectoryService.cs" />
     <Compile Include="src\Services\ConfigureBackupProcessWindowService.cs" />

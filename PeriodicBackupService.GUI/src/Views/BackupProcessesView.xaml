@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vm="clr-namespace:GUI.ViewModels"
-             xmlns:m="clr-namespace:PeriodicBackupService.Models;assembly=PeriodicBackupService"
              xmlns:ie="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=vm:BackupProcessesViewModel}"
@@ -110,7 +109,6 @@
                                         </Style>
                                     </ContentControl.Style>
                                 </ContentControl>
-                                
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
