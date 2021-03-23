@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using GUI.Services;
 using PeriodicBackupService;
@@ -222,7 +223,8 @@ namespace GUI.ViewModels
 			get
 			{
 				return forceBackupCommand ?? (forceBackupCommand =
-					new RelayCommand(p => { ProcessModels[SelectedIndex].ForceAction(); }, p => SelectedIndex > -1));
+					new RelayCommand(p => { Task.Run(() => ProcessModels[SelectedIndex].ForceAction()); },
+						p => SelectedIndex > -1 && !ProcessModels[SelectedIndex].IsBackingUp));
 			}
 		}
 

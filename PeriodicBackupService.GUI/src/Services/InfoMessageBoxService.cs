@@ -6,7 +6,7 @@ namespace GUI.Services
 	{
 		public void ShowMessage(string text, string caption = "Info")
 		{
-			MessageBox.Show(text, caption, MessageBoxButton.OK);
+			MessageBox.Show(text, "Info", MessageBoxButton.OK);
 		}
 	}
 }

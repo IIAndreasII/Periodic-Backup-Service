@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System.ComponentModel;
+using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using GUI.Services;
 using PeriodicBackupService.Models;
@@ -17,6 +19,7 @@ namespace GUI.ViewModels
 		private readonly IMessageBoxService messageBoxService;
 
 		private string backUpName;
+		private bool isBackingUp;
 
 		#endregion
 
@@ -29,6 +32,16 @@ namespace GUI.ViewModels
 		}
 
 		#region Properties / Commands
+
+		public bool IsBackingUp
+		{
+			get => isBackingUp;
+			set
+			{
+				isBackingUp = value;
+				OnPropertyChanged(nameof(IsBackingUp));
+			}
+		}
 
 		public string BackupName
 		{
@@ -46,15 +59,20 @@ namespace GUI.ViewModels
 			{
 				return createBackupCommand ?? (createBackupCommand = new RelayCommand(p =>
 					{
-						backupManager.SourcePath = SourcePath;
-						backupManager.TargetPath = TargetPath;
-						backupManager.UseCompression = UseCompression;
-						string message = backupManager.CreateBackup(BackupName)
-							? "Backup successful!"
-							: "Backup failed!";
-						messageBoxService.ShowMessage(message);
+						IsBackingUp = true;
+						Task.Run(() =>
+						{
+							backupManager.SourcePath = SourcePath;
+							backupManager.TargetPath = TargetPath;
+							backupManager.UseCompression = UseCompression;
+							string message = backupManager.CreateBackup(BackupName)
+								? "Backup successful!"
+								: "Backup failed!";
+							IsBackingUp = false;
+							messageBoxService.ShowMessage(message);
+						});
 					},
-					p => ValidateProperties()));
+					p => ValidateProperties() && !isBackingUp));
 			}
 		}
 

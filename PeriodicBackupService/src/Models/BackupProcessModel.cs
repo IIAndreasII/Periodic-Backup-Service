@@ -11,6 +11,7 @@ namespace PeriodicBackupService.Models
 		private string name;
 		private string status = Constants.RUNNING;
 		private string lastBackupStatus = Constants.OK;
+		private bool isBackingUp;
 
 		private DateTime nextBackupTime;
 
@@ -56,6 +57,16 @@ namespace PeriodicBackupService.Models
 		public string TargetPath { get; }
 
 		public string NextBackup => NextBackupTime.ToLongTimeString();
+
+		public bool IsBackingUp
+		{
+			get => isBackingUp;
+			private set
+			{
+				isBackingUp = value;
+				OnPropertyChanged(nameof(IsBackingUp));
+			}
+		}
 
 		public DateTime NextBackupTime
 		{
@@ -124,9 +135,12 @@ namespace PeriodicBackupService.Models
 
 		private void DoBackup()
 		{
+			IsBackingUp = true;
 			LastBackupStatusTime = DateTime.Now;
+			bool backupResult = backupManager.CreateBackup();
+			IsBackingUp = false;
 			LastBackupStatus =
-				$"{(backupManager.CreateBackup() ? Constants.OK : Constants.NOK)} - {DateTime.Now.ToLongTimeString()}";
+				$"{(backupResult ? Constants.OK : Constants.NOK)} - {DateTime.Now.ToLongTimeString()}";
 			NextBackupTime = DateTime.Now.AddMilliseconds(interval);
 			stopwatch = Stopwatch.StartNew();
 		}

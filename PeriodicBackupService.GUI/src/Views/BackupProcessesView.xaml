@@ -4,10 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vm="clr-namespace:GUI.ViewModels"
+             xmlns:m="clr-namespace:PeriodicBackupService.Models;assembly=PeriodicBackupService"
              xmlns:ie="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=vm:BackupProcessesViewModel}"
              d:DesignHeight="450" d:DesignWidth="800">
+
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
     </UserControl.Resources>
@@ -58,7 +60,7 @@
             </ListView.ItemContainerStyle>
 
             <ListView.View>
-                <GridView AllowsColumnReorder="True">
+                <GridView AllowsColumnReorder="False">
 
                     <GridViewColumn Width="200">
                         <GridViewColumnHeader Content="Name" Command="{Binding Path=SortNameCommand}"/>
@@ -82,7 +84,33 @@
                         <GridViewColumnHeader Content="Last Backup" Command="{Binding Path=SortLastBackupCommand}"/>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding LastBackupStatus}" TextAlignment="Center"/>
+                                <ContentControl Content="{Binding}">
+                                    <ContentControl.Style>
+                                        <Style TargetType="{x:Type ContentControl}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsBackingUp}" Value="True">
+                                                    <Setter Property="ContentTemplate">
+                                                        <Setter.Value>
+                                                            <DataTemplate>
+                                                                <ProgressBar IsIndeterminate="True"/>
+                                                            </DataTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding IsBackingUp}" Value="False">
+                                                    <Setter Property="ContentTemplate">
+                                                        <Setter.Value>
+                                                            <DataTemplate>
+                                                                <TextBlock Text="{Binding LastBackupStatus}" TextAlignment="Center"/>
+                                                            </DataTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ContentControl.Style>
+                                </ContentControl>
+                                
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
