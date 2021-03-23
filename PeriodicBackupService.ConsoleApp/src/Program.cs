@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PeriodicBackupService.ConsoleApp
+namespace GUI.ConsoleApp
 {
 	internal class Program
 	{

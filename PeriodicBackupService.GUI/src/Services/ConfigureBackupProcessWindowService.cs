@@ -1,11 +1,17 @@
-﻿using System.Windows;
-using GUI.src.Views;
+﻿using GUI.src.Views;
+using System.Windows;
 
 namespace GUI.Services
 {
-	class ConfigureBackupProcessWindowService : IWindowService
+	internal class ConfigureBackupProcessWindowService : IWindowService
 	{
+		#region Fields
+
 		private Window window;
+
+		#endregion
+
+		#region IWindowService Members
 
 		public void OpenWindow(object context)
 		{
@@ -17,5 +23,7 @@ namespace GUI.Services
 		{
 			window?.Close();
 		}
+
+		#endregion
 	}
 }

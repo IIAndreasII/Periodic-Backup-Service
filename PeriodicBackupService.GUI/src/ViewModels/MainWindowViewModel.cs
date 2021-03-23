@@ -1,19 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using GUI.Base;
+using GUI.Models;
+using GUI.Models.Factories;
+using GUI.Services;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
-using GUI.Services;
-using PeriodicBackupService.Models;
-using PeriodicBackupService.Models.Factories;
 
 namespace GUI.ViewModels
 {
-	public class MainWindowViewModel : ViewModelBase
+	public class MainWindowViewModel : ModelBase
 	{
+		#region Fields
+
 		private ICommand changePageCommand;
 
 		private IPageViewModel currentPageViewModel;
 		private List<IPageViewModel> pageViewModels;
 
+		#endregion
+
+		#region Constructors
 
 		public MainWindowViewModel(IIOService ioService)
 		{
@@ -23,15 +29,9 @@ namespace GUI.ViewModels
 				new ConfigureBackupProcessWindowService(), ioService));
 		}
 
+		#endregion
 
-		public ICommand ChangePageCommand
-		{
-			get
-			{
-				return changePageCommand ?? (changePageCommand =
-					new RelayCommand(p => ChangeViewModel((IPageViewModel) p), p => p is IPageViewModel));
-			}
-		}
+		#region Properties
 
 		public IPageViewModel CurrentPageViewModel
 		{
@@ -50,6 +50,23 @@ namespace GUI.ViewModels
 
 		public List<IPageViewModel> PageViewModels => pageViewModels ?? (pageViewModels = new List<IPageViewModel>());
 
+		#endregion
+
+		#region Commands
+
+		public ICommand ChangePageCommand
+		{
+			get
+			{
+				return changePageCommand ?? (changePageCommand =
+					new RelayCommand(p => ChangeViewModel((IPageViewModel) p), p => p is IPageViewModel));
+			}
+		}
+
+		#endregion
+
+		#region Helper Methods
+
 		private void ChangeViewModel(IPageViewModel viewModel)
 		{
 			if (!PageViewModels.Contains(viewModel))
@@ -59,5 +76,7 @@ namespace GUI.ViewModels
 
 			CurrentPageViewModel = PageViewModels.FirstOrDefault(vm => vm == viewModel);
 		}
+
+		#endregion
 	}
 }

@@ -1,8 +1,8 @@
-﻿using System;
+﻿using PeriodicBackupService.Core;
+using System;
 using System.Timers;
-using PeriodicBackupService.Core;
 
-namespace PeriodicBackupService.ConsoleApp
+namespace GUI.ConsoleApp
 {
 	internal class App
 	{

@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Windows.Input;
 
-namespace GUI
+namespace GUI.ViewModels
 {
 	public class RelayCommand : ICommand
 	{
@@ -11,7 +11,7 @@ namespace GUI
 		private readonly Action<object> execute;
 		private readonly Predicate<object> canExecute;
 
-		#endregion // Fields 
+		#endregion
 
 		#region Constructors
 
@@ -25,7 +25,7 @@ namespace GUI
 			this.canExecute = canExecute;
 		}
 
-		#endregion // Constructors 
+		#endregion
 
 		#region ICommand Members
 
@@ -46,6 +46,6 @@ namespace GUI
 			execute(parameter);
 		}
 
-		#endregion // ICommand Members 
+		#endregion
 	}
 }

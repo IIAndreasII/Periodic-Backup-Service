@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PeriodicBackupService.ConsoleApp
+namespace GUI.ConsoleApp
 {
 	internal class ArgumentParser
 	{

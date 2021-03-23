@@ -837,7 +837,7 @@ namespace PeriodicBackupService.Annotations
 	/// <c>System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper, String)</c>.
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method | AttributeTargets.Field |
-	                AttributeTargets.Property)]
+					AttributeTargets.Property)]
 	public sealed class AspMvcActionAttribute : Attribute
 	{
 		public AspMvcActionAttribute()
@@ -879,7 +879,7 @@ namespace PeriodicBackupService.Annotations
 	/// <c>System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper, String, String)</c>.
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method | AttributeTargets.Field |
-	                AttributeTargets.Property)]
+					AttributeTargets.Property)]
 	public sealed class AspMvcControllerAttribute : Attribute
 	{
 		public AspMvcControllerAttribute()
@@ -919,7 +919,7 @@ namespace PeriodicBackupService.Annotations
 	/// <c>System.Web.Mvc.Html.RenderPartialExtensions.RenderPartial(HtmlHelper, String)</c>.
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method | AttributeTargets.Field |
-	                AttributeTargets.Property)]
+					AttributeTargets.Property)]
 	public sealed class AspMvcPartialViewAttribute : Attribute
 	{
 	}
@@ -969,7 +969,7 @@ namespace PeriodicBackupService.Annotations
 	/// <c>System.Web.Mvc.Controller.View(Object)</c>.
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method | AttributeTargets.Field |
-	                AttributeTargets.Property)]
+					AttributeTargets.Property)]
 	public sealed class AspMvcViewAttribute : Attribute
 	{
 	}
@@ -988,7 +988,7 @@ namespace PeriodicBackupService.Annotations
 	/// is an MVC view component view. If applied to a method, the MVC view component view name is default.
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method | AttributeTargets.Field |
-	                AttributeTargets.Property)]
+					AttributeTargets.Property)]
 	public sealed class AspMvcViewComponentViewAttribute : Attribute
 	{
 	}

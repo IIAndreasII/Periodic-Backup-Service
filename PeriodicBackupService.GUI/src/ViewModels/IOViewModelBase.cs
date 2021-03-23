@@ -1,11 +1,13 @@
-﻿using System.Windows.Input;
+﻿using GUI.Base;
 using GUI.Services;
-using PeriodicBackupService;
+using System.Windows.Input;
 
 namespace GUI.ViewModels
 {
-	public abstract class IOViewModelBase : ViewModelBase
+	public abstract class IOViewModelBase : ModelBase
 	{
+		#region Fields
+
 		private ICommand chooseSourcePathCommand;
 		private ICommand chooseTargetPathCommand;
 
@@ -15,11 +17,19 @@ namespace GUI.ViewModels
 		private string targetPath;
 		private bool useCompression;
 
+		#endregion
+
+		#region Constructors
+
 		protected IOViewModelBase(IIOService ioService)
 		{
 			this.ioService = ioService;
 			UseCompression = true;
 		}
+
+		#endregion
+
+		#region Properties
 
 		public string SourcePath
 		{
@@ -51,6 +61,10 @@ namespace GUI.ViewModels
 			}
 		}
 
+		#endregion
+
+		#region Commands
+
 		public ICommand ChooseSourcePathCommand
 		{
 			get
@@ -72,5 +86,7 @@ namespace GUI.ViewModels
 				}));
 			}
 		}
+
+		#endregion
 	}
 }

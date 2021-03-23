@@ -2,13 +2,23 @@
 using System.ComponentModel;
 using System.Diagnostics;
 
-namespace GUI.ViewModels
+namespace GUI.Base
 {
-	public abstract class ViewModelBase : INotifyPropertyChanged
+	public abstract class ModelBase : INotifyPropertyChanged
 	{
+		#region Fields
+
 		public bool ThrowOnInvalidPropertyName { get; protected set; }
 
+		#endregion
+
+		#region Event Handlers
+
 		public event PropertyChangedEventHandler PropertyChanged;
+
+		#endregion
+
+		#region INotifyPropertyChanged Members
 
 		protected virtual void OnPropertyChanged(string propertyName)
 		{
@@ -22,6 +32,10 @@ namespace GUI.ViewModels
 			PropertyChangedEventArgs e = new PropertyChangedEventArgs(propertyName);
 			handler(this, e);
 		}
+
+		#endregion
+
+		#region Helper Methods
 
 		[Conditional("DEBUG")]
 		[DebuggerStepThrough]
@@ -42,5 +56,7 @@ namespace GUI.ViewModels
 
 			Debug.Fail(msg);
 		}
+
+		#endregion
 	}
 }

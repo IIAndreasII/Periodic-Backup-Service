@@ -12,7 +12,7 @@ namespace PeriodicBackupService.Test
 		private const string SOURCE_DIR = "";
 		private const string TARGET_DIR = "";
 
-		private IBackupManager backupManager;
+		private readonly IBackupManager backupManager;
 
 		[SetUp]
 		public void Setup()

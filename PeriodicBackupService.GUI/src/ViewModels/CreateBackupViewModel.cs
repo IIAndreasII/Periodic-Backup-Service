@@ -1,17 +1,16 @@
-﻿using System.ComponentModel;
+﻿using GUI.Models;
+using GUI.Services;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using GUI.Services;
-using PeriodicBackupService.Models;
 
 namespace GUI.ViewModels
 {
 	public class CreateBackupViewModel : IOViewModelBase, IPageViewModel
 	{
-		public string Name => "Create backup";
-
 		#region Fields
+
+		public string Name => "Create backup";
 
 		private ICommand createBackupCommand;
 
@@ -23,6 +22,8 @@ namespace GUI.ViewModels
 
 		#endregion
 
+		#region Constructors
+
 		public CreateBackupViewModel(BackupDirectoryManagerModel backupManager, IMessageBoxService messageBoxService,
 			IIOService ioService) : base(ioService)
 		{
@@ -31,7 +32,9 @@ namespace GUI.ViewModels
 			BackupName = string.Empty;
 		}
 
-		#region Properties / Commands
+		#endregion
+
+		#region Properties
 
 		public bool IsBackingUp
 		{
@@ -52,6 +55,10 @@ namespace GUI.ViewModels
 				OnPropertyChanged(nameof(BackupName));
 			}
 		}
+
+		#endregion
+
+		#region Commands
 
 		public ICommand CreateBackupCommand
 		{

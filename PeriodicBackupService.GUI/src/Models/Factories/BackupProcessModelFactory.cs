@@ -1,9 +1,11 @@
 ﻿using PeriodicBackupService.Core;
 
-namespace PeriodicBackupService.Models.Factories
+namespace GUI.Models.Factories
 {
 	public class BackupProcessModelFactory : IProcessFactory
 	{
+		#region IProcessFactory Members
+
 		public IProcessModel Create(params object[] data)
 		{
 			int maxNbrBackups = int.Parse(ParseStringOrDefault(data[3], "0"));
@@ -19,9 +21,15 @@ namespace PeriodicBackupService.Models.Factories
 				bool.Parse(ParseStringOrDefault(data[7], true.ToString())));
 		}
 
+		#endregion
+
+		#region Helper Methods
+
 		private static string ParseStringOrDefault(object o, string defaultValue = "")
 		{
-			return string.IsNullOrWhiteSpace(o as string) ? defaultValue : (string)o;
+			return string.IsNullOrWhiteSpace(o as string) ? defaultValue : (string) o;
 		}
+
+		#endregion
 	}
 }

@@ -1,7 +1,7 @@
-﻿using System.Windows;
-using GUI.Services;
+﻿using GUI.Services;
 using GUI.ViewModels;
 using GUI.Views;
+using System.Windows;
 
 namespace GUI
 {
@@ -13,7 +13,7 @@ namespace GUI
 		protected override void OnStartup(StartupEventArgs e)
 		{
 			base.OnStartup(e);
-			MainWindow window = new MainWindow {DataContext = new MainWindowViewModel(new ChooseDirectoryService())};
+			MainWindow window = new MainWindow { DataContext = new MainWindowViewModel(new ChooseDirectoryService()) };
 			window.Show();
 		}
 	}

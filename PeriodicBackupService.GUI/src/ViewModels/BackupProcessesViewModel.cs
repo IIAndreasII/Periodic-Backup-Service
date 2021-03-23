@@ -1,3 +1,6 @@
+using GUI.Models;
+using GUI.Models.Factories;
+using GUI.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -5,10 +8,6 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using GUI.Services;
-using PeriodicBackupService;
-using PeriodicBackupService.Models;
-using PeriodicBackupService.Models.Factories;
 
 namespace GUI.ViewModels
 {
@@ -345,7 +344,7 @@ namespace GUI.ViewModels
 
 		#endregion
 
-		#region Helper methods
+		#region Helper Methods
 
 		private bool ValidateParams()
 		{
