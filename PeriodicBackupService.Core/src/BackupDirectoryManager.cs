@@ -69,23 +69,30 @@ namespace PeriodicBackupService.Core
 
 			string backupDir = Path.Combine(targetDir, name);
 
-			if (!Directory.Exists(backupDir))
+
+			if (!useCompression)
 			{
-				Console.WriteLine("\nCreating backup directory...");
-				Directory.CreateDirectory(backupDir);
+				if (!Directory.Exists(backupDir))
+				{
+					Console.WriteLine("\nCreating backup directory...");
+					Directory.CreateDirectory(backupDir);
+				}
+
+				foreach (string dirPath in Directory.GetDirectories(sourceDir, "*", SearchOption.AllDirectories))
+				{
+					Console.WriteLine($"\nCreating subdirectories...");
+					Directory.CreateDirectory(dirPath.Replace(sourceDir, backupDir));
+				}
+
+				foreach (string newPath in Directory.GetFiles(sourceDir, "*", SearchOption.AllDirectories))
+				{
+					Console.WriteLine($"\nCopying \"{newPath}\" to {backupDir}");
+					File.Copy(newPath, newPath.Replace(sourceDir, backupDir), true);
+				}
 			}
-
-			foreach (string file in Directory.GetFiles(sourceDir))
+			else
 			{
-				string destFile = Path.Combine(backupDir, Path.GetFileName(file));
-
-				Console.WriteLine($"\nCopying \"{file}\" to {backupDir}");
-				File.Copy(file, destFile, true);
-			}
-
-			if (useCompression)
-			{
-				CompressDirectory(backupDir);
+				CompressDirectory(sourceDir, backupDir);
 			}
 
 			if (maxNbrBackups > 0)
@@ -96,19 +103,19 @@ namespace PeriodicBackupService.Core
 			return true;
 		}
 
-		private static void CompressDirectory(string directory, bool deleteUncompressed = true)
+		private static void CompressDirectory(string sourceDir, string targetDir, bool overwrite = true)
 		{
 			try
 			{
-				string archiveName = directory + ".zip";
+				string archiveName = targetDir + ".zip";
 
-				Console.WriteLine($"\nCompressing directory \"{directory}\" into \"{archiveName}\"");
-				ZipFile.CreateFromDirectory(directory, archiveName);
-
-				if (deleteUncompressed)
+				Console.WriteLine($"\nCompressing directory \"{sourceDir}\" into \"{archiveName}\"");
+				if (overwrite)
 				{
-					Directory.Delete(directory, true);
+					File.Delete(archiveName);
 				}
+
+				ZipFile.CreateFromDirectory(sourceDir, archiveName);
 
 				Console.WriteLine("\nCompression successful!");
 			}
