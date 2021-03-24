@@ -1,7 +1,8 @@
 ﻿using GUI.Services;
-using GUI.ViewModels;
 using GUI.Views;
 using System.Windows;
+using PeriodicBackupService.GUI.Core.Services;
+using PeriodicBackupService.GUI.Core.ViewModels;
 
 namespace GUI
 {
@@ -13,7 +14,11 @@ namespace GUI
 		protected override void OnStartup(StartupEventArgs e)
 		{
 			base.OnStartup(e);
-			MainWindow window = new MainWindow { DataContext = new MainWindowViewModel(new ChooseDirectoryService()) };
+			MainWindow window = new MainWindow
+			{
+				DataContext = new MainWindowViewModel(new ChooseDirectoryService(),
+					new ConfigureBackupProcessWindowService())
+			};
 			window.Show();
 		}
 	}

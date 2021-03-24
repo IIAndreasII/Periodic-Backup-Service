@@ -104,25 +104,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="src\Constants.cs" />
-    <Compile Include="src\Models\BackupDirectoryManagerModel.cs" />
-    <Compile Include="src\Models\BackupProcessModel.cs" />
-    <Compile Include="src\Models\Factories\BackupProcessModelFactory.cs" />
-    <Compile Include="src\Models\Factories\IProcessFactory.cs" />
-    <Compile Include="src\Models\IProcessModel.cs" />
-    <Compile Include="src\Base\ModelBase.cs" />
-    <Compile Include="src\ViewModels\RelayCommand.cs" />
-    <Compile Include="src\Services\ChooseDirectoryService.cs" />
     <Compile Include="src\Services\ConfigureBackupProcessWindowService.cs" />
-    <Compile Include="src\Services\IIOService.cs" />
-    <Compile Include="src\Services\IMessageBoxService.cs" />
-    <Compile Include="src\Services\InfoMessageBoxService.cs" />
-    <Compile Include="src\Services\IWindowService.cs" />
-    <Compile Include="src\ViewModels\BackupProcessesViewModel.cs" />
-    <Compile Include="src\ViewModels\CreateBackupViewModel.cs" />
-    <Compile Include="src\ViewModels\IOViewModelBase.cs" />
-    <Compile Include="src\ViewModels\IPageViewModel.cs" />
-    <Compile Include="src\ViewModels\MainWindowViewModel.cs" />
     <Compile Include="src\Views\BackupProcessesView.xaml.cs">
       <DependentUpon>BackupProcessesView.xaml</DependentUpon>
     </Compile>
@@ -175,9 +157,9 @@
     <Resource Include="keytar-platy-upsized.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PeriodicBackupService.Core\PeriodicBackupService.Core.csproj">
-      <Project>{617688c9-c281-4b94-86e9-f75e9a28624a}</Project>
-      <Name>PeriodicBackupService.Core</Name>
+    <ProjectReference Include="..\PeriodicBackupService.GUI.Core\PeriodicBackupService.GUI.Core.csproj">
+      <Project>{BAC0E7F8-7F3B-4F1D-B1FD-82AD84F96157}</Project>
+      <Name>PeriodicBackupService.GUI.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

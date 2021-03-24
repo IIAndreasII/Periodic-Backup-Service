@@ -1,9 +1,10 @@
 ﻿using GUI.src.Views;
+using PeriodicBackupService.GUI.Core.Services;
 using System.Windows;
 
 namespace GUI.Services
 {
-	internal class ConfigureBackupProcessWindowService : IWindowService
+	public class ConfigureBackupProcessWindowService : IWindowService
 	{
 		#region Fields
 
