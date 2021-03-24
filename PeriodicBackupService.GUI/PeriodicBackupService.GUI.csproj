@@ -50,8 +50,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>
-    </StartupObject>
+    <StartupObject>GUI.App</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>keytar-platy-upsized.ico</ApplicationIcon>
@@ -75,7 +74,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
@@ -154,9 +152,6 @@
     <Resource Include="Resources\keytar-platy-upsized.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="keytar-platy-upsized.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\PeriodicBackupService.GUI.Core\PeriodicBackupService.GUI.Core.csproj">
       <Project>{BAC0E7F8-7F3B-4F1D-B1FD-82AD84F96157}</Project>
       <Name>PeriodicBackupService.GUI.Core</Name>
@@ -173,6 +168,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="keytar-platy-upsized.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
