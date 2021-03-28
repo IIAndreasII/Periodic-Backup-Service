@@ -18,7 +18,6 @@ namespace PeriodicBackupService.GUI.Core.ViewModels
 
 		private ICommand changePageCommand;
 
-		private ICommand newConfigCommand;
 		private ICommand loadConfigCommand;
 		private ICommand saveConfigCommand;
 		private ICommand saveConfigAsCommand;
@@ -87,8 +86,6 @@ namespace PeriodicBackupService.GUI.Core.ViewModels
 			}
 		}
 
-		public ICommand NewConfigCommand => newConfigCommand ??= new RelayCommand(NewConfig);
-
 		public ICommand SaveConfigCommand => saveConfigCommand ??= new RelayCommand(SaveConfig);
 
 		public ICommand SaveConfigAsCommand => saveConfigAsCommand ??= new RelayCommand(SaveConfigAs);
@@ -111,19 +108,8 @@ namespace PeriodicBackupService.GUI.Core.ViewModels
 			CurrentPageViewModel = PageViewModels.FirstOrDefault(vm => vm == viewModel);
 		}
 
-
-		private void NewConfig(object commandParameter)
-		{
-			currentConfigPath = saveConfigService.GetPath();
-		}
-
 		private void SaveConfig(object commandParameter)
 		{
-			if (string.IsNullOrWhiteSpace(currentConfigPath))
-			{
-				return;
-			}
-
 			if (!File.Exists(currentConfigPath))
 			{
 				SaveConfigAs(commandParameter);
