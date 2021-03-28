@@ -13,12 +13,24 @@ namespace PeriodicBackupService.GUI.Core.Models.Factories
 
 			string intervalUnit = ParseStringOrDefault(data[5], Constants.HOURS);
 			string intervalString = ParseStringOrDefault(data[4], "0");
-			double interval = intervalUnit == Constants.HOURS
-				? TimeUtils.HoursToMillis(int.Parse(intervalString))
-				: TimeUtils.MinutesToMillis(int.Parse(intervalString));
+
+			int intervalMillis = int.Parse(intervalString);
+
+			double interval;
+
+			if (data.Length > 8)
+			{
+				interval = intervalMillis;
+			}
+			else
+			{
+				interval = intervalUnit == Constants.HOURS
+					? TimeUtils.HoursToMillis(intervalMillis)
+					: TimeUtils.MinutesToMillis(intervalMillis);
+			}
 
 			return new BackupProcessModel(data[0] as string, data[1] as string, data[2] as string, maxNbrBackups,
-				interval, bool.Parse(ParseStringOrDefault(data[6], true.ToString())),
+				interval, intervalUnit, bool.Parse(ParseStringOrDefault(data[6], true.ToString())),
 				bool.Parse(ParseStringOrDefault(data[7], true.ToString())));
 		}
 

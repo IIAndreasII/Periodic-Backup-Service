@@ -14,6 +14,14 @@ namespace PeriodicBackupService.GUI.Core.Models
 
 		string TargetPath { get; }
 
+		public int MaxNbrBackups { get; }
+
+		public double Interval { get; }
+
+		public bool UseCompression { get; }
+
+		public string IntervalUnit { get; }
+
 		bool IsBackingUp { get; }
 
 		DateTime NextBackupTime { get; set; }

@@ -1,6 +1,7 @@
 ﻿using GUI.Services;
 using GUI.Views;
 using System.Windows;
+using PeriodicBackupService.GUI.Core.IO;
 using PeriodicBackupService.GUI.Core.Services;
 using PeriodicBackupService.GUI.Core.ViewModels;
 
@@ -17,7 +18,7 @@ namespace GUI
 			MainWindow window = new MainWindow
 			{
 				DataContext = new MainWindowViewModel(new ChooseDirectoryService(),
-					new ConfigureBackupProcessWindowService())
+					new ConfigureBackupProcessWindowService(), new SaveFileService(), new ChooseFileService())
 			};
 			window.Show();
 		}

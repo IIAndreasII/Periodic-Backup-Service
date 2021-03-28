@@ -30,11 +30,16 @@ namespace PeriodicBackupService.GUI.Core.Models
 		#region Constructors
 
 		public BackupProcessModel(string name, string sourcePath, string targetPath, int maxNbrBackups, double interval,
+			string intervalUnit,
 			bool useCompression, bool backupOnInit = true)
 		{
 			Name = name;
 			SourcePath = sourcePath;
 			TargetPath = targetPath;
+			MaxNbrBackups = maxNbrBackups;
+			Interval = interval;
+			IntervalUnit = intervalUnit;
+			UseCompression = useCompression;
 			backupManager = new BackupDirectoryManager(sourcePath, targetPath, maxNbrBackups, useCompression);
 			this.interval = interval == 0 ? TimeUtils.HoursToMillis(1) : interval;
 			SetUpTimer();
@@ -78,6 +83,8 @@ namespace PeriodicBackupService.GUI.Core.Models
 			}
 		}
 
+		public string IntervalUnit { get; }
+
 		public bool IsBackingUp
 		{
 			get => isBackingUp;
@@ -104,6 +111,12 @@ namespace PeriodicBackupService.GUI.Core.Models
 		public string TargetPath { get; }
 
 		public string NextBackup => NextBackupTime.ToLongTimeString();
+
+		public int MaxNbrBackups { get; private set; }
+
+		public double Interval { get; }
+
+		public bool UseCompression { get; }
 
 		#endregion
 

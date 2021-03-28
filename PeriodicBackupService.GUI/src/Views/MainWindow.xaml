@@ -21,20 +21,23 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top"  BorderBrush="DarkGray" BorderThickness="0,0,0,1">
             <MenuItem Header="_File">
-                <MenuItem Header="_New"/>
-                <MenuItem Header="_Open..."/>
-                <MenuItem Header="_Save"/>
-                <MenuItem Header="_Save as..."/>
+                <MenuItem Header="_Open..."
+                          Command="{Binding LoadConfigCommand}"/>
+                <MenuItem Header="_Save"
+                          Command="{Binding SaveConfigCommand}"/>
+                <MenuItem Header="_Save as..."
+                          Command="{Binding SaveConfigAsCommand}"/>
                 <Separator/>
-                <MenuItem Header="_Exit"/>
+                <MenuItem Header="_Exit"
+                          Command="{Binding ExitApplicationCommand}"/>
             </MenuItem>
         </Menu>
         
-        <Border DockPanel.Dock="Left" BorderBrush="Black" BorderThickness="0,0,0,0" Width="150">
+        <Border DockPanel.Dock="Left" BorderBrush="Black" BorderThickness="0" Width="150">
             <ItemsControl ItemsSource="{Binding PageViewModels}" Margin="0,1">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Button FontSize="15" Height="40" BorderBrush="Transparent"
+                        <Button FontSize="15" Height="40" BorderThickness="0"
                                 Content="{Binding Name}"
                                 Command="{Binding DataContext.ChangePageCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
                                 CommandParameter="{Binding }"

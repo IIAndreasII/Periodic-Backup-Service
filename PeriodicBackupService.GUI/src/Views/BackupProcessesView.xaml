@@ -41,10 +41,10 @@
 
             <ListView.Resources>
                 <ContextMenu x:Key="ItemContextMenu">
-                    <MenuItem Header="Force backup"
-                              Command="{Binding Path=DataContext.ForceBackupCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}}"/>
                     <MenuItem Header="{Binding Path=DataContext.ToggleButtonText, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}}"
                               Command="{Binding Path=DataContext.ToggleProcessCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}}"/>
+                    <MenuItem Header="Force backup"
+                              Command="{Binding Path=DataContext.ForceBackupCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}}"/>
                     <Separator/>
                     <MenuItem Header="Terminate"
                               Command="{Binding Path=DataContext.TerminateProcessCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}}"/>

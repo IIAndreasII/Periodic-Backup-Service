@@ -148,7 +148,7 @@ namespace PeriodicBackupService.GUI.Core.ViewModels
 
 		public ObservableCollection<IProcessModel> ProcessModels
 		{
-			get => processModels ?? (processModels = new ObservableCollection<IProcessModel>());
+			get => processModels ??= new ObservableCollection<IProcessModel>();
 			set
 			{
 				processModels = value;
@@ -164,12 +164,12 @@ namespace PeriodicBackupService.GUI.Core.ViewModels
 		{
 			get
 			{
-				return addProcessCommand ?? (addProcessCommand = new RelayCommand(p =>
+				return addProcessCommand ??= new RelayCommand(p =>
 				{
 					IsAddProcess = true;
 					ClearFields();
 					windowService.OpenWindow(this);
-				}));
+				});
 			}
 		}
 
@@ -177,16 +177,15 @@ namespace PeriodicBackupService.GUI.Core.ViewModels
 		{
 			get
 			{
-				return editProcessCommand ?? (editProcessCommand =
-					new RelayCommand(p =>
-					{
-						IsAddProcess = false;
-						SourcePath = ProcessModels[SelectedIndex].SourcePath;
-						TargetPath = ProcessModels[SelectedIndex].TargetPath;
-						ProcessName = ProcessModels[SelectedIndex].Name;
+				return editProcessCommand ??= new RelayCommand(p =>
+				{
+					IsAddProcess = false;
+					SourcePath = ProcessModels[SelectedIndex].SourcePath;
+					TargetPath = ProcessModels[SelectedIndex].TargetPath;
+					ProcessName = ProcessModels[SelectedIndex].Name;
 
-						windowService.OpenWindow(this);
-					}, p => SelectedIndex > -1));
+					windowService.OpenWindow(this);
+				}, p => SelectedIndex > -1);
 			}
 		}
 
@@ -194,13 +193,13 @@ namespace PeriodicBackupService.GUI.Core.ViewModels
 		{
 			get
 			{
-				return toggleProcessCommand ?? (toggleProcessCommand = new RelayCommand(p =>
+				return toggleProcessCommand ??= new RelayCommand(p =>
 					{
 						ProcessModels[SelectedIndex].Toggle();
 						UpdateToggleButtonText();
 						OnPropertyChanged(nameof(ProcessModels));
 					},
-					p => SelectedIndex > -1));
+					p => SelectedIndex > -1);
 			}
 		}
 
@@ -208,13 +207,13 @@ namespace PeriodicBackupService.GUI.Core.ViewModels
 		{
 			get
 			{
-				return terminateProcessCommand ?? (terminateProcessCommand = new RelayCommand(p =>
+				return terminateProcessCommand ??= new RelayCommand(p =>
 					{
 						ProcessModels.RemoveAt(SelectedIndex);
 						SelectedIndex = -1;
 						OnPropertyChanged(nameof(ProcessModels));
 					},
-					p => SelectedIndex < ProcessModels.Count && SelectedIndex > -1));
+					p => SelectedIndex < ProcessModels.Count && SelectedIndex > -1);
 			}
 		}
 
@@ -222,9 +221,9 @@ namespace PeriodicBackupService.GUI.Core.ViewModels
 		{
 			get
 			{
-				return forceBackupCommand ?? (forceBackupCommand =
-					new RelayCommand(p => { Task.Run(() => ProcessModels[SelectedIndex].ForceAction()); },
-						p => SelectedIndex > -1 && !ProcessModels[SelectedIndex].IsBackingUp));
+				return forceBackupCommand ??= new RelayCommand(
+					p => { Task.Run(() => ProcessModels[SelectedIndex].ForceAction()); },
+					p => SelectedIndex > -1 && !ProcessModels[SelectedIndex].IsBackingUp);
 			}
 		}
 
@@ -232,8 +231,8 @@ namespace PeriodicBackupService.GUI.Core.ViewModels
 		{
 			get
 			{
-				return selectionChangedCommand ?? (selectionChangedCommand =
-					new RelayCommand(p => UpdateToggleButtonText(), p => SelectedIndex > -1));
+				return selectionChangedCommand ??=
+					new RelayCommand(p => UpdateToggleButtonText(), p => SelectedIndex > -1);
 			}
 		}
 
@@ -241,7 +240,7 @@ namespace PeriodicBackupService.GUI.Core.ViewModels
 		{
 			get
 			{
-				return confirmConfigurationCommand ?? (confirmConfigurationCommand = new RelayCommand(p =>
+				return confirmConfigurationCommand ??= new RelayCommand(p =>
 					{
 						windowService.CloseWindow();
 
@@ -262,31 +261,25 @@ namespace PeriodicBackupService.GUI.Core.ViewModels
 
 						OnPropertyChanged(nameof(ProcessModels));
 					},
-					p => ValidateParams()));
+					p => ValidateParams());
 			}
 		}
 
 		public ICommand CancelConfigurationCommand
 		{
-			get
-			{
-				return cancelConfigurationCommand ?? (cancelConfigurationCommand = new RelayCommand(p =>
-				{
-					windowService.CloseWindow();
-				}));
-			}
+			get { return cancelConfigurationCommand ??= new RelayCommand(p => { windowService.CloseWindow(); }); }
 		}
 
 		public ICommand SortNameCommand
 		{
 			get
 			{
-				return sortNameCommand ?? (sortNameCommand = new RelayCommand(p =>
+				return sortNameCommand ??= new RelayCommand(p =>
 				{
 					nameSortingFactor = -nameSortingFactor;
 					SortProcessModels((left, right) =>
 						nameSortingFactor * string.Compare(left.Name, right.Name, StringComparison.Ordinal));
-				}));
+				});
 			}
 		}
 
@@ -294,12 +287,12 @@ namespace PeriodicBackupService.GUI.Core.ViewModels
 		{
 			get
 			{
-				return sortNextBackupCommand ?? (sortNextBackupCommand = new RelayCommand(p =>
+				return sortNextBackupCommand ??= new RelayCommand(p =>
 				{
 					nextTimeSortingFactor = -nextTimeSortingFactor;
 					SortProcessModels((left, right) =>
 						nextTimeSortingFactor * DateTime.Compare(left.NextBackupTime, right.NextBackupTime));
-				}));
+				});
 			}
 		}
 
@@ -307,7 +300,7 @@ namespace PeriodicBackupService.GUI.Core.ViewModels
 		{
 			get
 			{
-				return sortLastBackupCommand ?? (sortLastBackupCommand = new RelayCommand(p =>
+				return sortLastBackupCommand ??= new RelayCommand(p =>
 				{
 					lastBackupSortingFactor = -lastBackupSortingFactor;
 					SortProcessModels((left, right) =>
@@ -325,7 +318,7 @@ namespace PeriodicBackupService.GUI.Core.ViewModels
 						return lastBackupSortingFactor *
 						       DateTime.Compare(left.LastBackupStatusTime, right.LastBackupStatusTime);
 					});
-				}));
+				});
 			}
 		}
 
@@ -333,13 +326,13 @@ namespace PeriodicBackupService.GUI.Core.ViewModels
 		{
 			get
 			{
-				return sortStatusCommand ?? (sortStatusCommand = new RelayCommand(p =>
+				return sortStatusCommand ??= new RelayCommand(p =>
 				{
 					statusSortingFactor = -statusSortingFactor;
 					SortProcessModels((left, right) => statusSortingFactor *
 					                                   string.Compare(left.Status, right.Status,
 						                                   StringComparison.Ordinal));
-				}));
+				});
 			}
 		}
 

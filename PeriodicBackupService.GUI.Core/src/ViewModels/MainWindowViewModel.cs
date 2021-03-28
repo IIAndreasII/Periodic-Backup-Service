@@ -1,7 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Windows.Input;
 using PeriodicBackupService.GUI.Core.Base;
+using PeriodicBackupService.GUI.Core.IO;
 using PeriodicBackupService.GUI.Core.Models;
 using PeriodicBackupService.GUI.Core.Models.Factories;
 using PeriodicBackupService.GUI.Core.Services;
@@ -14,19 +18,39 @@ namespace PeriodicBackupService.GUI.Core.ViewModels
 
 		private ICommand changePageCommand;
 
+		private ICommand newConfigCommand;
+		private ICommand loadConfigCommand;
+		private ICommand saveConfigCommand;
+		private ICommand saveConfigAsCommand;
+
+		private ICommand exitApplicationCommand;
+
+		private readonly IIOService saveConfigService;
+		private readonly IIOService chooseFileService;
+		private readonly IOManager ioManager;
+
 		private IPageViewModel currentPageViewModel;
 		private List<IPageViewModel> pageViewModels;
+
+		private readonly BackupProcessesViewModel backupProcessesViewModel;
+
+		private string currentConfigPath;
 
 		#endregion
 
 		#region Constructors
 
-		public MainWindowViewModel(IIOService ioService, IWindowService windowService)
+		public MainWindowViewModel(IIOService ioService, IWindowService windowService, IIOService saveConfigService,
+			IIOService chooseFileService)
 		{
 			PageViewModels.Add(new CreateBackupViewModel(new BackupDirectoryManagerModel(), new InfoMessageBoxService(),
 				ioService));
-			PageViewModels.Add(new BackupProcessesViewModel(new BackupProcessModelFactory(),
-				windowService, ioService));
+			backupProcessesViewModel =
+				new BackupProcessesViewModel(new BackupProcessModelFactory(), windowService, ioService);
+			PageViewModels.Add(backupProcessesViewModel);
+			this.saveConfigService = saveConfigService;
+			this.chooseFileService = chooseFileService;
+			ioManager = new IOManager();
 		}
 
 		#endregion
@@ -48,7 +72,7 @@ namespace PeriodicBackupService.GUI.Core.ViewModels
 			}
 		}
 
-		public List<IPageViewModel> PageViewModels => pageViewModels ?? (pageViewModels = new List<IPageViewModel>());
+		public List<IPageViewModel> PageViewModels => pageViewModels ??= new List<IPageViewModel>();
 
 		#endregion
 
@@ -58,10 +82,20 @@ namespace PeriodicBackupService.GUI.Core.ViewModels
 		{
 			get
 			{
-				return changePageCommand ?? (changePageCommand =
-					new RelayCommand(p => ChangeViewModel((IPageViewModel) p), p => p is IPageViewModel));
+				return changePageCommand ??=
+					new RelayCommand(p => ChangeViewModel((IPageViewModel) p), p => p is IPageViewModel);
 			}
 		}
+
+		public ICommand NewConfigCommand => newConfigCommand ??= new RelayCommand(NewConfig);
+
+		public ICommand SaveConfigCommand => saveConfigCommand ??= new RelayCommand(SaveConfig);
+
+		public ICommand SaveConfigAsCommand => saveConfigAsCommand ??= new RelayCommand(SaveConfigAs);
+
+		public ICommand LoadConfigCommand => loadConfigCommand ??= new RelayCommand(LoadConfig);
+
+		public ICommand ExitApplicationCommand => exitApplicationCommand ??= new RelayCommand(ExitApplication);
 
 		#endregion
 
@@ -75,6 +109,65 @@ namespace PeriodicBackupService.GUI.Core.ViewModels
 			}
 
 			CurrentPageViewModel = PageViewModels.FirstOrDefault(vm => vm == viewModel);
+		}
+
+
+		private void NewConfig(object commandParameter)
+		{
+			currentConfigPath = saveConfigService.GetPath();
+		}
+
+		private void SaveConfig(object commandParameter)
+		{
+			if (string.IsNullOrWhiteSpace(currentConfigPath))
+			{
+				return;
+			}
+
+			if (!File.Exists(currentConfigPath))
+			{
+				SaveConfigAs(commandParameter);
+			}
+			else
+			{
+				SaveProcessList(currentConfigPath);
+			}
+		}
+
+		private void SaveConfigAs(object commandParameter)
+		{
+			string filepath = currentConfigPath = saveConfigService.GetPath();
+			SaveProcessList(filepath);
+		}
+
+		private void LoadConfig(object commandParameter)
+		{
+			string filepath = currentConfigPath = chooseFileService.GetPath();
+
+			var list = ioManager.Deserialized(filepath, new BackupProcessModelFactory());
+
+			var newList = new ObservableCollection<IProcessModel>();
+
+			foreach (IProcessModel it in list)
+			{
+				newList.Add(it);
+			}
+
+			backupProcessesViewModel.ProcessModels = newList;
+
+			CurrentPageViewModel = backupProcessesViewModel;
+		}
+
+		private void SaveProcessList(string filepath)
+		{
+			var list = backupProcessesViewModel.ProcessModels.ToList();
+			ioManager.SetItems(list);
+			ioManager.Write(filepath);
+		}
+
+		private static void ExitApplication(object commandParameter)
+		{
+			Environment.Exit(0);
 		}
 
 		#endregion
