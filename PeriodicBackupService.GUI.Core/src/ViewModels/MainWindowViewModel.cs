@@ -123,7 +123,10 @@ namespace PeriodicBackupService.GUI.Core.ViewModels
 		private void SaveConfigAs(object commandParameter)
 		{
 			string filepath = currentConfigPath = saveConfigService.GetPath();
-			SaveProcessList(filepath);
+			if (!string.IsNullOrWhiteSpace(filepath))
+			{
+				SaveProcessList(filepath);
+			}
 		}
 
 		private void LoadConfig(object commandParameter)
