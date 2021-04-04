@@ -6,7 +6,7 @@ namespace PeriodicBackupService.GUI.Core.Services
 	{
 		public string GetPath(string defaultPath = "")
 		{
-			SaveFileDialog sfd = new SaveFileDialog
+			var sfd = new SaveFileDialog
 			{
 				DefaultExt = ".bp", OverwritePrompt = true, AddExtension = true, Title = "Save config...",
 				Filter = "Backup Process (*.bp)|*.bp"

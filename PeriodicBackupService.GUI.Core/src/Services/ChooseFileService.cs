@@ -6,7 +6,7 @@ namespace PeriodicBackupService.GUI.Core.Services
 	{
 		public string GetPath(string defaultPath = "")
 		{
-			OpenFileDialog ofd = new OpenFileDialog
+			var ofd = new OpenFileDialog
 			{
 				Multiselect = false, Filter = "Backup Process (*.bp)|*.bp", Title = "Load config..."
 			};

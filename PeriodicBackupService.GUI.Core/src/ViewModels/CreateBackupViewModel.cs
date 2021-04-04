@@ -1,5 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using PeriodicBackupService.GUI.Core.Models;
 using PeriodicBackupService.GUI.Core.Services;
@@ -16,6 +18,7 @@ namespace PeriodicBackupService.GUI.Core.ViewModels
 
 		private readonly BackupDirectoryManagerModel backupManager;
 		private readonly IMessageBoxService messageBoxService;
+		private readonly IMessageBoxService confirmationService; 
 
 		private string backUpName;
 		private bool isBackingUp;
@@ -64,22 +67,34 @@ namespace PeriodicBackupService.GUI.Core.ViewModels
 		{
 			get
 			{
-				return createBackupCommand ?? (createBackupCommand = new RelayCommand(p =>
+				return createBackupCommand ??= new RelayCommand(p =>
 					{
 						IsBackingUp = true;
 						Task.Run(() =>
 						{
-							backupManager.SourcePath = SourcePath;
-							backupManager.TargetPath = TargetPath;
-							backupManager.UseCompression = UseCompression;
-							string message = backupManager.CreateBackup(BackupName)
-								? "Backup successful!"
-								: "Backup failed!";
-							IsBackingUp = false;
-							messageBoxService.ShowMessage(message);
+							if (!ValidateBackupName())
+							{
+								switch (confirmationService.Show("Backup with the same already exists. Overwrite it?", "Hej"))
+								{
+									case MessageBoxResult.Yes:
+										DoBackup();
+										break;
+									case MessageBoxResult.No:
+									case MessageBoxResult.None:
+									case MessageBoxResult.OK:
+									case MessageBoxResult.Cancel:
+										break;
+									default:
+										throw new ArgumentOutOfRangeException();
+								}
+							}
+							else
+							{
+								DoBackup();
+							}
 						});
 					},
-					p => ValidateProperties() && !isBackingUp));
+					p => ValidateProperties() && !isBackingUp);
 			}
 		}
 
@@ -104,6 +119,19 @@ namespace PeriodicBackupService.GUI.Core.ViewModels
 				!string.IsNullOrWhiteSpace(BackupName) &&
 				BackupName.IndexOfAny(Path.GetInvalidFileNameChars()) < 0 &&
 				!File.Exists(Path.Combine(SourcePath, BackupName));
+		}
+
+		private void DoBackup()
+		{
+			backupManager.SourcePath = SourcePath;
+			backupManager.TargetPath = TargetPath;
+			backupManager.UseCompression = UseCompression;
+
+			var message = backupManager.CreateBackup(BackupName)
+				? "Backup successful!"
+				: "Backup failed!";
+			IsBackingUp = false;
+			messageBoxService.Show(message);
 		}
 
 		#endregion

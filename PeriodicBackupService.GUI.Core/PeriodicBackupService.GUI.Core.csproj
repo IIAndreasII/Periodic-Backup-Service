@@ -54,6 +54,7 @@
     <Compile Include="src\Models\IProcessModel.cs" />
     <Compile Include="src\Services\ChooseDirectoryService.cs" />
     <Compile Include="src\Services\ChooseFileService.cs" />
+    <Compile Include="src\Services\ConfirmationService.cs" />
     <Compile Include="src\Services\IIOService.cs" />
     <Compile Include="src\Services\IMessageBoxService.cs" />
     <Compile Include="src\Services\InfoMessageBoxService.cs" />

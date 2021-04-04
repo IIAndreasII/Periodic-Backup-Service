@@ -15,9 +15,9 @@ namespace PeriodicBackupService.GUI.Core.IO
 		public void SetItems(List<IProcessModel> items)
 		{
 			itemList.Clear();
-			foreach (IProcessModel it in items)
+			foreach (var it in items)
 			{
-				BackupProcessSerializable bps = new BackupProcessSerializable
+				var bps = new BackupProcessSerializable
 				{
 					SourcePath = it.SourcePath,
 					TargetPath = it.TargetPath,
@@ -36,8 +36,8 @@ namespace PeriodicBackupService.GUI.Core.IO
 		{
 			try
 			{
-				using FileStream fs = File.Create(filepath);
-				using StreamWriter sw = new StreamWriter(fs);
+				using var fs = File.Create(filepath);
+				using var sw = new StreamWriter(fs);
 				sw.Write(Serialized());
 			}
 			catch (Exception e)
@@ -51,8 +51,8 @@ namespace PeriodicBackupService.GUI.Core.IO
 		{
 			try
 			{
-				using FileStream fs = File.OpenRead(filepath);
-				using StreamReader sr = new StreamReader(fs);
+				using var fs = File.OpenRead(filepath);
+				using var sr = new StreamReader(fs);
 				return sr.ReadToEnd();
 			}
 			catch (Exception e)

@@ -6,9 +6,9 @@ namespace PeriodicBackupService.GUI.Core.Services
 	{
 		#region IMessageBoxService Members
 
-		public void ShowMessage(string text, string caption = "Message")
+		public MessageBoxResult Show(string text, string caption = "Message")
 		{
-			MessageBox.Show(text, "Info", MessageBoxButton.OK);
+			return MessageBox.Show(text, "Info", MessageBoxButton.OK);
 		}
 
 		#endregion

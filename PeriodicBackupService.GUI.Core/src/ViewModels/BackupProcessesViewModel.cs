@@ -244,13 +244,13 @@ namespace PeriodicBackupService.GUI.Core.ViewModels
 					{
 						windowService.CloseWindow();
 
-						IProcessModel process = processModelFactory.Create(ProcessName, SourcePath, TargetPath,
+						var process = processModelFactory.Create(ProcessName, SourcePath, TargetPath,
 							MaxNbrBackups,
 							Interval, intervalUnit, UseCompression.ToString(), true.ToString());
 
 						if (!isAddProcess)
 						{
-							int tempIndex = SelectedIndex;
+							var tempIndex = SelectedIndex;
 							ProcessModels.RemoveAt(tempIndex);
 							ProcessModels.Insert(tempIndex > -1 ? tempIndex : 0, process);
 						}
@@ -375,7 +375,7 @@ namespace PeriodicBackupService.GUI.Core.ViewModels
 			tempList.Sort(comparison);
 
 			ProcessModels.Clear();
-			foreach (IProcessModel it in tempList)
+			foreach (var it in tempList)
 			{
 				ProcessModels.Add(it);
 			}

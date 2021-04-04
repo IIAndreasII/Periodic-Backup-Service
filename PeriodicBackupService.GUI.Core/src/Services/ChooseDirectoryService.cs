@@ -8,7 +8,7 @@ namespace PeriodicBackupService.GUI.Core.Services
 
 		public string GetPath(string defaultPath = "")
 		{
-			FolderBrowserDialog fbd = new FolderBrowserDialog();
+			var fbd = new FolderBrowserDialog();
 			return fbd.ShowDialog() == DialogResult.OK ? fbd.SelectedPath : string.Empty;
 		}
 

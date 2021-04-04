@@ -42,7 +42,7 @@ namespace PeriodicBackupService.GUI.Core.ViewModels
 		public MainWindowViewModel(IIOService ioService, IWindowService windowService, IIOService saveConfigService,
 			IIOService chooseFileService)
 		{
-			PageViewModels.Add(new CreateBackupViewModel(new BackupDirectoryManagerModel(), new InfoMessageBoxService(),
+			PageViewModels.Add(new CreateBackupViewModel(new BackupDirectoryManagerModel(), new InfoMessageBoxService(), new ConfirmationService(),
 				ioService));
 			backupProcessesViewModel =
 				new BackupProcessesViewModel(new BackupProcessModelFactory(), windowService, ioService);
@@ -122,7 +122,7 @@ namespace PeriodicBackupService.GUI.Core.ViewModels
 
 		private void SaveConfigAs(object commandParameter)
 		{
-			string filepath = currentConfigPath = saveConfigService.GetPath();
+			var filepath = currentConfigPath = saveConfigService.GetPath();
 			if (!string.IsNullOrWhiteSpace(filepath))
 			{
 				SaveProcessList(filepath);
@@ -131,13 +131,13 @@ namespace PeriodicBackupService.GUI.Core.ViewModels
 
 		private void LoadConfig(object commandParameter)
 		{
-			string filepath = currentConfigPath = chooseFileService.GetPath();
+			var filepath = currentConfigPath = chooseFileService.GetPath();
 
 			var list = ioManager.Deserialized(filepath, new BackupProcessModelFactory());
 
 			var newList = new ObservableCollection<IProcessModel>();
 
-			foreach (IProcessModel it in list)
+			foreach (var it in list)
 			{
 				newList.Add(it);
 			}

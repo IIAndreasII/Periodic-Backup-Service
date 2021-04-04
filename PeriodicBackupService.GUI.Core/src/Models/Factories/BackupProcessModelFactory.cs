@@ -9,12 +9,12 @@ namespace PeriodicBackupService.GUI.Core.Models.Factories
 
 		public IProcessModel Create(params object[] data)
 		{
-			int maxNbrBackups = int.Parse(ParseStringOrDefault(data[3], "0"));
+			var maxNbrBackups = int.Parse(ParseStringOrDefault(data[3], "0"));
 
-			string intervalUnit = ParseStringOrDefault(data[5], Constants.HOURS);
-			string intervalString = ParseStringOrDefault(data[4], "0");
+			var intervalUnit = ParseStringOrDefault(data[5], Constants.HOURS);
+			var intervalString = ParseStringOrDefault(data[4], "0");
 
-			int intervalMillis = int.Parse(intervalString);
+			var intervalMillis = int.Parse(intervalString);
 
 			double interval;
 

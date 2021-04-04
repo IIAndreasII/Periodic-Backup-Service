@@ -173,7 +173,7 @@ namespace PeriodicBackupService.GUI.Core.Models
 		{
 			IsBackingUp = true;
 			LastBackupStatusTime = DateTime.Now;
-			bool backupResult = backupManager.CreateBackup();
+			var backupResult = backupManager.CreateBackup();
 			IsBackingUp = false;
 			LastBackupStatus =
 				$"{(backupResult ? Constants.OK : Constants.NOK)} - {DateTime.Now.ToLongTimeString()}";

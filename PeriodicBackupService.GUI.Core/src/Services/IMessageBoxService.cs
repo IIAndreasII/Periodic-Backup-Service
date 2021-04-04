@@ -1,7 +1,9 @@
-﻿namespace PeriodicBackupService.GUI.Core.Services
+﻿using System.Windows;
+
+namespace PeriodicBackupService.GUI.Core.Services
 {
 	public interface IMessageBoxService
 	{
-		void ShowMessage(string text, string caption = "Message");
+		MessageBoxResult Show(string text);
 	}
 }

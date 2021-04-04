@@ -23,13 +23,13 @@ namespace PeriodicBackupService.GUI.Core.Base
 		protected virtual void OnPropertyChanged(string propertyName)
 		{
 			VerifyPropertyName(propertyName);
-			PropertyChangedEventHandler handler = PropertyChanged;
+			var handler = PropertyChanged;
 			if (handler == null)
 			{
 				return;
 			}
 
-			PropertyChangedEventArgs e = new PropertyChangedEventArgs(propertyName);
+			var e = new PropertyChangedEventArgs(propertyName);
 			handler(this, e);
 		}
 
@@ -48,7 +48,7 @@ namespace PeriodicBackupService.GUI.Core.Base
 				return;
 			}
 
-			string msg = "Invalid property name: " + propertyName;
+			var msg = "Invalid property name: " + propertyName;
 			if (ThrowOnInvalidPropertyName)
 			{
 				throw new Exception(msg);
