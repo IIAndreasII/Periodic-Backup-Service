@@ -27,11 +27,12 @@ namespace PeriodicBackupService.GUI.Core.ViewModels
 
 		#region Constructors
 
-		public CreateBackupViewModel(BackupDirectoryManagerModel backupManager, IMessageBoxService messageBoxService,
+		public CreateBackupViewModel(BackupDirectoryManagerModel backupManager, IMessageBoxService messageBoxService, IMessageBoxService confirmationService,
 			IIOService ioService) : base(ioService)
 		{
 			this.backupManager = backupManager;
 			this.messageBoxService = messageBoxService;
+			this.confirmationService = confirmationService;
 			BackupName = string.Empty;
 		}
 
@@ -72,14 +73,16 @@ namespace PeriodicBackupService.GUI.Core.ViewModels
 						IsBackingUp = true;
 						Task.Run(() =>
 						{
-							if (!ValidateBackupName())
+							if (!ValidateAvailability())
 							{
-								switch (confirmationService.Show("Backup with the same already exists. Overwrite it?", "Hej"))
+								switch (confirmationService.Show("A backup with the same name already exists. Overwrite it?", "Warning"))
 								{
 									case MessageBoxResult.Yes:
 										DoBackup();
 										break;
 									case MessageBoxResult.No:
+										IsBackingUp = false;
+										break;
 									case MessageBoxResult.None:
 									case MessageBoxResult.OK:
 									case MessageBoxResult.Cancel:
@@ -117,8 +120,14 @@ namespace PeriodicBackupService.GUI.Core.ViewModels
 			return
 				BackupName == string.Empty ||
 				!string.IsNullOrWhiteSpace(BackupName) &&
-				BackupName.IndexOfAny(Path.GetInvalidFileNameChars()) < 0 &&
-				!File.Exists(Path.Combine(SourcePath, BackupName));
+				BackupName.IndexOfAny(Path.GetInvalidFileNameChars()) < 0;
+		}
+
+		private bool ValidateAvailability()
+		{
+			return UseCompression
+				? !File.Exists(Path.Combine(TargetPath, string.Join(string.Empty, BackupName, ".zip")))
+				: !Directory.Exists(Path.Combine(TargetPath, BackupName));
 		}
 
 		private void DoBackup()

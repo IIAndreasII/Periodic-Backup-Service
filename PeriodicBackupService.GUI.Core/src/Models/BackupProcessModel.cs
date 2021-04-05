@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Timers;
-using GUI;
 using PeriodicBackupService.Core;
 using PeriodicBackupService.GUI.Core.Base;
 

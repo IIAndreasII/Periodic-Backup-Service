@@ -1,4 +1,4 @@
-﻿namespace GUI
+﻿namespace PeriodicBackupService.GUI.Core
 {
 	public class Constants
 	{

@@ -3,8 +3,10 @@
 namespace PeriodicBackupService.GUI.Core.IO
 {
 	[Serializable]
-	class BackupProcessSerializable
+	internal class BackupProcessSerializable
 	{
+		#region Properties
+
 		public string Name { get; set; }
 		public string SourcePath { get; set; }
 		public string TargetPath { get; set; }
@@ -12,5 +14,7 @@ namespace PeriodicBackupService.GUI.Core.IO
 		public int MaxNbrBackups { get; set; }
 		public bool UseCompression { get; set; }
 		public string IntervalUnit { get; set; }
+		
+		#endregion
 	}
 }

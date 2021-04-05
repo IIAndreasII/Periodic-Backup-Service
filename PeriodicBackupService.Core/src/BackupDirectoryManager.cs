@@ -61,13 +61,13 @@ namespace PeriodicBackupService.Core
 			if (string.IsNullOrEmpty(name))
 			{
 				// Create directory with current date and time
-				string timeString =
+				var timeString =
 					DateTime.Now.ToString("u").Replace('-', '_')
 						.Replace(':', '-'); // Make Windows accept directory name
 				name = timeString.Remove(timeString.Length - 1, 1);
 			}
 
-			string backupDir = Path.Combine(targetDir, name);
+			var backupDir = Path.Combine(targetDir, name);
 
 
 			if (!useCompression)
@@ -78,13 +78,13 @@ namespace PeriodicBackupService.Core
 					Directory.CreateDirectory(backupDir);
 				}
 
-				foreach (string dirPath in Directory.GetDirectories(sourceDir, "*", SearchOption.AllDirectories))
+				foreach (var dirPath in Directory.GetDirectories(sourceDir, "*", SearchOption.AllDirectories))
 				{
 					Console.WriteLine($"\nCreating subdirectories...");
 					Directory.CreateDirectory(dirPath.Replace(sourceDir, backupDir));
 				}
 
-				foreach (string newPath in Directory.GetFiles(sourceDir, "*", SearchOption.AllDirectories))
+				foreach (var newPath in Directory.GetFiles(sourceDir, "*", SearchOption.AllDirectories))
 				{
 					Console.WriteLine($"\nCopying \"{newPath}\" to {backupDir}");
 					File.Copy(newPath, newPath.Replace(sourceDir, backupDir), true);
@@ -107,7 +107,7 @@ namespace PeriodicBackupService.Core
 		{
 			try
 			{
-				string archiveName = targetDir + ".zip";
+				var archiveName = targetDir + ".zip";
 
 				Console.WriteLine($"\nCompressing directory \"{sourceDir}\" into \"{archiveName}\"");
 				if (overwrite)
@@ -140,7 +140,7 @@ namespace PeriodicBackupService.Core
 			{
 				Array.Sort(fileSystemInfos, (left, right) => left.CreationTime.CompareTo(right.CreationTime));
 
-				for (int i = fileSystemInfos.Length - maxNbrBackups; i > 0; i--)
+				for (var i = fileSystemInfos.Length - maxNbrBackups; i > 0; i--)
 				{
 					Console.WriteLine($"Deleting \"{fileSystemInfos[i - 1].FullName}\"\n");
 

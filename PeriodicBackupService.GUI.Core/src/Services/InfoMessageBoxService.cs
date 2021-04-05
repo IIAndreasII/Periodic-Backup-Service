@@ -2,11 +2,11 @@
 
 namespace PeriodicBackupService.GUI.Core.Services
 {
-	internal class InfoMessageBoxService : IMessageBoxService
+	public class InfoMessageBoxService : IMessageBoxService
 	{
 		#region IMessageBoxService Members
 
-		public MessageBoxResult Show(string text, string caption = "Message")
+		public MessageBoxResult Show(string text, string caption)
 		{
 			return MessageBox.Show(text, "Info", MessageBoxButton.OK);
 		}

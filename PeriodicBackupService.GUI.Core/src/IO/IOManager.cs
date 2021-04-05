@@ -15,19 +15,17 @@ namespace PeriodicBackupService.GUI.Core.IO
 		public void SetItems(List<IProcessModel> items)
 		{
 			itemList.Clear();
-			foreach (var it in items)
+			foreach (var bps in items.Select(it => new BackupProcessSerializable
 			{
-				var bps = new BackupProcessSerializable
-				{
-					SourcePath = it.SourcePath,
-					TargetPath = it.TargetPath,
-					UseCompression = it.UseCompression,
-					Interval = it.Interval,
-					IntervalUnit = it.IntervalUnit,
-					MaxNbrBackups = it.MaxNbrBackups,
-					Name = it.Name
-				};
-
+				SourcePath = it.SourcePath,
+				TargetPath = it.TargetPath,
+				UseCompression = it.UseCompression,
+				Interval = it.Interval,
+				IntervalUnit = it.IntervalUnit,
+				MaxNbrBackups = it.MaxNbrBackups,
+				Name = it.Name
+			}))
+			{
 				itemList.Add(bps);
 			}
 		}

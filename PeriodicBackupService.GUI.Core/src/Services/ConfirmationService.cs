@@ -2,11 +2,15 @@
 
 namespace PeriodicBackupService.GUI.Core.Services
 {
-	class ConfirmationService : IMessageBoxService
+	public class ConfirmationService : IMessageBoxService
 	{
+		#region IMessageBoxService Members
+
 		public MessageBoxResult Show(string text, string caption)
 		{
 			return MessageBox.Show(text, caption, MessageBoxButton.YesNo);
 		}
+
+		#endregion
 	}
 }

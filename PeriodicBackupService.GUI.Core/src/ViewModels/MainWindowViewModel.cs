@@ -40,9 +40,9 @@ namespace PeriodicBackupService.GUI.Core.ViewModels
 		#region Constructors
 
 		public MainWindowViewModel(IIOService ioService, IWindowService windowService, IIOService saveConfigService,
-			IIOService chooseFileService)
+			IIOService chooseFileService, IMessageBoxService messageBoxService, IMessageBoxService confirmationService)
 		{
-			PageViewModels.Add(new CreateBackupViewModel(new BackupDirectoryManagerModel(), new InfoMessageBoxService(), new ConfirmationService(),
+			PageViewModels.Add(new CreateBackupViewModel(new BackupDirectoryManagerModel(), messageBoxService, confirmationService,
 				ioService));
 			backupProcessesViewModel =
 				new BackupProcessesViewModel(new BackupProcessModelFactory(), windowService, ioService);

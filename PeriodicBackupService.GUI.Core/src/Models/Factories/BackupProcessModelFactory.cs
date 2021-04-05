@@ -1,5 +1,4 @@
-﻿using GUI;
-using PeriodicBackupService.Core;
+﻿using PeriodicBackupService.Core;
 
 namespace PeriodicBackupService.GUI.Core.Models.Factories
 {

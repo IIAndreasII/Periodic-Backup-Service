@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using GUI;
 using PeriodicBackupService.GUI.Core.Models;
 using PeriodicBackupService.GUI.Core.Models.Factories;
 using PeriodicBackupService.GUI.Core.Services;
