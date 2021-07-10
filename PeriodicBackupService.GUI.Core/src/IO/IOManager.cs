@@ -34,9 +34,9 @@ namespace PeriodicBackupService.GUI.Core.IO
 		{
 			try
 			{
-				using var fs = File.Create(filepath);
-				using var sw = new StreamWriter(fs);
-				sw.Write(Serialized());
+				using var file = File.Create(filepath);
+				using var streamWriter = new StreamWriter(file);
+				streamWriter.Write(Serialized());
 			}
 			catch (Exception e)
 			{
@@ -67,7 +67,7 @@ namespace PeriodicBackupService.GUI.Core.IO
 					it.Interval.ToString(),
 					it.IntervalUnit,
 					it.UseCompression.ToString(),
-					true.ToString(), "")).ToList();
+					true.ToString(), string.Empty)).ToList();
 			return thing;
 		}
 
