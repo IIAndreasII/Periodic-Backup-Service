@@ -49,9 +49,9 @@ namespace PeriodicBackupService.GUI.Core.IO
 		{
 			try
 			{
-				using var fs = File.OpenRead(filepath);
-				using var sr = new StreamReader(fs);
-				return sr.ReadToEnd();
+				using var file = File.OpenRead(filepath);
+				using var streamReader = new StreamReader(file);
+				return streamReader.ReadToEnd();
 			}
 			catch (Exception e)
 			{
@@ -62,13 +62,13 @@ namespace PeriodicBackupService.GUI.Core.IO
 
 		public List<IProcessModel> Deserialized(string filepath, IProcessFactory factory)
 		{
-			var thing = JsonConvert.DeserializeObject<List<BackupProcessSerializable>>(Read(filepath))?.Select(it =>
+			var deserialized = JsonConvert.DeserializeObject<List<BackupProcessSerializable>>(Read(filepath))?.Select(it =>
 				factory.Create(it.Name, it.SourcePath, it.TargetPath, it.MaxNbrBackups.ToString(),
 					it.Interval.ToString(),
 					it.IntervalUnit,
 					it.UseCompression.ToString(),
 					true.ToString(), string.Empty)).ToList();
-			return thing;
+			return deserialized;
 		}
 
 		public string Serialized()
