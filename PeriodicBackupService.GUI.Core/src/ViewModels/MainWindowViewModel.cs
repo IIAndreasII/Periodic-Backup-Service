@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Windows.Input;
@@ -31,6 +32,8 @@ namespace PeriodicBackupService.GUI.Core.ViewModels
 		private IPageViewModel currentPageViewModel;
 		private List<IPageViewModel> pageViewModels;
 
+		private readonly List<string> recentFilePaths;
+
 		private readonly BackupProcessesViewModel backupProcessesViewModel;
 
 		private string currentConfigPath;
@@ -50,6 +53,7 @@ namespace PeriodicBackupService.GUI.Core.ViewModels
 			this.saveConfigService = saveConfigService;
 			this.chooseFileService = chooseFileService;
 			ioManager = new IOManager();
+			recentFilePaths = new List<string>();
 		}
 
 		#endregion
@@ -121,6 +125,7 @@ namespace PeriodicBackupService.GUI.Core.ViewModels
 			{
 				SaveProcessList(filepath);
 			}
+			AddRecentFilePath(filepath);
 		}
 
 		private void LoadConfig(object commandParameter)
@@ -151,11 +156,26 @@ namespace PeriodicBackupService.GUI.Core.ViewModels
 			var list = backupProcessesViewModel.ProcessModels.ToList();
 			ioManager.SetItems(list);
 			ioManager.Write(filepath);
+			AddRecentFilePath(filepath);
+		}
+
+		private void AddRecentFilePath(string filepath)
+		{
+			recentFilePaths.Add(filepath);
+			while (recentFilePaths.Count > 5)
+			{
+				recentFilePaths.RemoveAt(0);
+			}
 		}
 
 		private static void ExitApplication(object commandParameter)
 		{
 			Environment.Exit(0);
+		}
+
+		public void OnWindowClosing(object sender, CancelEventArgs e)
+		{
+			ioManager.Write("recent.txt", recentFilePaths.ToString());
 		}
 
 		#endregion

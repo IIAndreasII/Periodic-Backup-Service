@@ -28,6 +28,10 @@
                 <MenuItem Header="_Save as..."
                           Command="{Binding SaveConfigAsCommand}"/>
                 <Separator/>
+                <MenuItem Header="Recent Files">
+                
+                </MenuItem>
+                    <Separator/>
                 <MenuItem Header="_Exit"
                           Command="{Binding ExitApplicationCommand}"/>
             </MenuItem>

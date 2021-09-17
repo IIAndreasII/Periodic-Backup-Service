@@ -14,12 +14,15 @@ namespace GUI
 		protected override void OnStartup(StartupEventArgs e)
 		{
 			base.OnStartup(e);
+			var viewModel = new MainWindowViewModel(new ChooseDirectoryService(),
+					new ConfigureBackupProcessWindowService(), new SaveFileService(), new ChooseFileService(), new InfoMessageBoxService(), new ConfirmationService());
 			var window = new MainWindow
 			{
-				DataContext = new MainWindowViewModel(new ChooseDirectoryService(),
-					new ConfigureBackupProcessWindowService(), new SaveFileService(), new ChooseFileService(), new InfoMessageBoxService(), new ConfirmationService())
+				DataContext = viewModel,
 			};
+			//window.Closed += viewModel.OnWindowClosing();
 			window.Show();
+
 		}
 	}
 }

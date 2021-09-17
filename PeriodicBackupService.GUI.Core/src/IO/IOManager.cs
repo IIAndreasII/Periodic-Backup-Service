@@ -45,6 +45,21 @@ namespace PeriodicBackupService.GUI.Core.IO
 			}
 		}
 
+		public void Write(string filepath, string content)
+		{
+			try
+			{
+				using var file = File.Create(filepath);
+				using var streamWriter = new StreamWriter(file);
+				streamWriter.Write(content);
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e);
+				throw;
+			}
+		}
+
 		public string Read(string filepath)
 		{
 			try
