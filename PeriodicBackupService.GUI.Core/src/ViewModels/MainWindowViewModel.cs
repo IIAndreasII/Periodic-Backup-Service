@@ -77,14 +77,8 @@ namespace PeriodicBackupService.GUI.Core.ViewModels
 
 		#region Commands
 
-		public ICommand ChangePageCommand
-		{
-			get
-			{
-				return changePageCommand ??=
-					new RelayCommand(p => ChangeViewModel((IPageViewModel) p), p => p is IPageViewModel);
-			}
-		}
+		public ICommand ChangePageCommand => changePageCommand ??=
+					new RelayCommand(p => ChangeViewModel((IPageViewModel)p), p => p is IPageViewModel);
 
 		public ICommand SaveConfigCommand => saveConfigCommand ??= new RelayCommand(SaveConfig);
 
@@ -132,6 +126,11 @@ namespace PeriodicBackupService.GUI.Core.ViewModels
 		private void LoadConfig(object commandParameter)
 		{
 			var filepath = currentConfigPath = chooseFileService.GetPath();
+
+			if (string.IsNullOrEmpty(filepath))
+			{
+				return;
+			}
 
 			var list = ioManager.Deserialized(filepath, new BackupProcessModelFactory());
 

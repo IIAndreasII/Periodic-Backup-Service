@@ -14,7 +14,7 @@ namespace PeriodicBackupService.GUI.Core.Services
 				Filter = "Backup Process (*.bp)|*.bp",
 				Title = "Load config..."
 			};
-			ofd.ShowDialog();
+			_ = ofd.ShowDialog();
 
 			return ofd.FileName;
 		}
